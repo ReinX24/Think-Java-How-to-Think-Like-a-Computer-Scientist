@@ -2,6 +2,9 @@ public class ZoopBafflePing {
 
     public static void main(String[] args) {
 
+        // Exercise 4.3
+        // Think Java Book
+
         System.out.print("No, I ");
         zoop();
         System.out.print("I ");
@@ -32,7 +35,7 @@ public class ZoopBafflePing {
         // I wug.
 
         // Final output: 
-        
+
         // No, I wug.
         // You wugga wug.
         // I wug.
