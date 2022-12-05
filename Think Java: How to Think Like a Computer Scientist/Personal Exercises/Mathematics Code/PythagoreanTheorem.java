@@ -8,9 +8,9 @@ public class PythagoreanTheorem {
 
     // Variables to input our values
     // Variables need to be static so that they could be used by other classes
-    static double aLeg = 0; // perpendicular
-    static double bLeg = 0; // base
-    static double cLeg = 0; // hypotenuse
+    static Double aLeg = 0.0; // perpendicular
+    static Double bLeg = 0.0; // base
+    static Double cLeg = 0.0; // hypotenuse
     static boolean calcOn = true; // makes sure the calculator is on
     static int userInput = 0; // stores the user input
 
@@ -36,10 +36,19 @@ public class PythagoreanTheorem {
         System.out.println("[2] Perpendicular (A leg)");
         System.out.println("[3] Base (B leg)");
         System.out.println("[4] Close the calculator");
-        System.out.print("Input: ");
-        userInput = scanOne.nextInt();
 
-        // switch case for choices
+        try {
+
+            System.out.print("Input: ");
+            userInput = scanOne.nextInt();
+
+        }
+
+        catch (InputMismatchException ex) {
+
+            scanOne.nextLine(); // will lead to defualt case and go back to main menu
+
+        }
 
         switch (userInput) {
 
@@ -53,15 +62,11 @@ public class PythagoreanTheorem {
                 baseCalculate();
                 break;
             case 4:
-                System.out.println("[Pythagorean Calculator closed!]");
-                System.out.println("[Thank you for using!]");
-                calcOn = false; // turns off while loop and calculator as well
-                scanOne.close(); // closes the scanner
+                closeCalculator();
                 break;
             default:
-                System.out.println("==========================");
+                System.out.println("================================");
                 System.out.println("[Invalid Input, try again]");
-                System.out.println("==========================");
                 mainMenu();
                 break;
 
@@ -71,29 +76,64 @@ public class PythagoreanTheorem {
 
     public static void hypotenuseCalculate() {
 
-        // Asking user for values
-        System.out.print("Input Perpendicular or A leg: ");
-        aLeg = scanOne.nextDouble();
+        try {
 
-        System.out.print("Input Base or B leg: ");
-        bLeg = scanOne.nextDouble();
+            // Asking user for values
+            System.out.print("Input Perpendicular or A leg: ");
+            aLeg = scanOne.nextDouble();
+
+            System.out.print("Input Base or B leg: ");
+            bLeg = scanOne.nextDouble();
+
+        }
+
+        catch (InputMismatchException ex) { // executes catch block first before the else block
+
+            System.out.println("[Not a valid input, try again]");
+            scanOne.nextLine();
+
+        }
 
         // Calculate the hypotenuse
         cLeg = Math.sqrt(Math.pow(aLeg, 2) + Math.pow(bLeg, 2)); // for calculating the hypotenus
 
         // Show the result
-        System.out.println("================================");
-        System.out.printf("The hypotenuse of triangle: %.2f\n", cLeg); // roounded off to 2 decimal places
+
+        if (cLeg != 0) { // it is impossible for a hypotenuse to have a length of zero
+
+            System.out.println("================================");
+            System.out.printf("The hypotenuse of triangle: %.2f\n", cLeg); // roounded off to 2 decimal places
+            resetNum(); // resets the numbers
+
+        }
+
+        else {
+
+            resetNum();
+            hypotenuseCalculate();
+
+        }
 
     }
 
     public static void perpendicularCalculate() {
 
-        System.out.print("Input Base or B leg: ");
-        bLeg = scanOne.nextDouble();
+        try {
 
-        System.out.print("Input Hypotenuse or C leg: ");
-        cLeg = scanOne.nextDouble();
+            System.out.print("Input Base or B leg: ");
+            bLeg = scanOne.nextDouble();
+
+            System.out.print("Input Hypotenuse or C leg: ");
+            cLeg = scanOne.nextDouble();
+
+        }
+
+        catch (InputMismatchException ex) {
+
+            System.out.println("[Not a valid input, try again]");
+            scanOne.nextLine(); // goes to else block
+
+        }
 
         if (cLeg > bLeg) { // hypotenuse needs to be longer than base
 
@@ -101,12 +141,21 @@ public class PythagoreanTheorem {
 
             System.out.println("================================");
             System.out.printf("The perpendicular of triangle: %.2f\n", aLeg); // shows the perpendicular of the trangle
+            resetNum();
 
         }
 
-        else {
+        else if (cLeg < bLeg) {
 
             System.out.println("[Invalid input, the hypotenuse must be greater than the base]");
+            resetNum();
+            perpendicularCalculate();
+
+        }
+
+        else { // executes when an exception occurs
+
+            resetNum();
             perpendicularCalculate();
 
         }
@@ -115,11 +164,22 @@ public class PythagoreanTheorem {
 
     public static void baseCalculate() {
 
-        System.out.print("Input Perpendicular or A leg: ");
-        aLeg = scanOne.nextDouble();
+        try {
 
-        System.out.print("Input Hypotenuse or C leg: ");
-        cLeg = scanOne.nextDouble();
+            System.out.print("Input Perpendicular or A leg: ");
+            aLeg = scanOne.nextDouble();
+
+            System.out.print("Input Hypotenuse or C leg: ");
+            cLeg = scanOne.nextDouble();
+
+        }
+
+        catch (InputMismatchException ex) {
+
+            System.out.println("[Not a valid input, try again]");
+            scanOne.nextLine(); // goes to else block
+
+        }
 
         if (cLeg > aLeg) { // hypotenuse needs to be longer than the perpendicular
 
@@ -127,15 +187,41 @@ public class PythagoreanTheorem {
 
             System.out.println("================================");
             System.out.printf("The base of triangle: %.2f\n", bLeg);
+            resetNum();
+
+        }
+
+        else if (cLeg < aLeg) {
+
+            System.out.println("[Invalid input, the hypotenuse must be greater than the perpendicular]");
+            resetNum();
+            baseCalculate();
 
         }
 
         else {
 
-            System.out.println("[Invalid input, the hypotenuse must be greater than the perpendicular]");
+            resetNum();
             baseCalculate();
 
         }
+
+    }
+
+    public static void closeCalculator() {
+
+        System.out.println("[Pythagorean Calculator closed!]");
+        System.out.println("[Thank you for using!]");
+        calcOn = false; // turns off while loop and calculator as well
+        scanOne.close(); // closes the scanner
+
+    }
+
+    public static void resetNum() {
+
+        aLeg = 0.0;
+        bLeg = 0.0;
+        cLeg = 0.0;
 
     }
 
