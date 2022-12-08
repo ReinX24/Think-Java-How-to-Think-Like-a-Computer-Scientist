@@ -1,6 +1,3 @@
-import javax.sound.sampled.SourceDataLine;
-import javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec;
-
 public class ArrayPositionExercise {
 
     public static void main(String[] args) {
