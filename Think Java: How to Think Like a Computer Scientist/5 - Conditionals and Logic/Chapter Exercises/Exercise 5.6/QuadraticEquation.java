@@ -83,8 +83,8 @@ public class QuadraticEquation {
         }
 
         numB = numB * -1; // converts positive number into a negative number
-        numPosX = (float) (numB + Math.sqrt(Math.pow(numB, 2) - 4 * numA * numC) / 2 * numA); // add square root
-        numNegX = (float) (numB - Math.sqrt(Math.pow(numB, 2) - 4 * numA * numC) / 2 * numA); // subtract square root
+        numPosX = (float) (numB + Math.sqrt(Math.pow(numB, 2) - 4 * numA * numC)) / (2 * numA); // add square root
+        numNegX = (float) (numB - Math.sqrt(Math.pow(numB, 2) - 4 * numA * numC)) / (2 * numA); // subtract square root
 
         System.out.println("Answers: " + numPosX + " | " + numNegX); // prints the answers
 
