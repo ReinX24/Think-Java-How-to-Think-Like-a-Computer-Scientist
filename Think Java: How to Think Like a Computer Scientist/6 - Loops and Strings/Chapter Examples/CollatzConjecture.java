@@ -13,7 +13,7 @@ public class CollatzConjecture {
 
         while (userNum != 1) {
 
-            System.out.println(userNum);
+            System.out.println(userNum); // prints number
 
             if (userNum % 2 == 0) { // checks if the number is an odd number
 
@@ -23,11 +23,14 @@ public class CollatzConjecture {
 
             else if (userNum % 2 != 0) { // checks if the number is an even number
 
-                userNum = 3 * userNum + 1;
+                userNum = 3 * userNum + 1; // multiplies number by 3 and adds 1
 
             }
 
         }
+
+        System.out.println(userNum); // prints after while loop
+        System.out.println("[Number equal to 1, loop broken]");
 
         scanOne.close(); // closes Scanner
 
