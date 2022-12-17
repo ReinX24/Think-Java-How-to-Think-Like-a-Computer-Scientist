@@ -8,7 +8,7 @@ public class NestedLoops {
 
                 System.out.printf("%4d", x * y); // shows the product of x & y
                 // %4d places spaces before each number
-                
+
                 /*
                  * Explanation:
                  * Outer loop starts with one, inner loop start with one
@@ -40,7 +40,7 @@ public class NestedLoops {
 
         for (int i = 1; i <= 10; i++) {
 
-            for (int j = 1; j<= 10; j++) {
+            for (int j = 1; j <= 10; j++) {
 
                 System.out.printf("%4d", i * j);
 
