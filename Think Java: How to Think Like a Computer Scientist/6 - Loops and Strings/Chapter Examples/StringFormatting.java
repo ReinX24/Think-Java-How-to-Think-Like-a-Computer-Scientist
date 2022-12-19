@@ -24,7 +24,7 @@ public class StringFormatting {
 
             timeFormat = "A.M.";
 
-            if (inHour == 0) { // checks if hour is 0, if yes, reassign inHour to 12
+            if (inHour == 0) { // checks if hour is 0, if yes, reassign inHour to 12, represent 12 A.M. ->
 
                 inHour = 12;
 
