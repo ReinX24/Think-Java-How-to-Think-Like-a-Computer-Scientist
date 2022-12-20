@@ -58,22 +58,22 @@ public class Scrabble {
 
         // Count occurrences of all
         // characters in strOne.
-        int[] freq = new int[MAX_CHAR];
+        int[] freq = new int[MAX_CHAR]; // now contains 256 bits or zeroes
 
         for (int i = 0; i < strOne.length(); i++) {
 
-            freq[strOne.charAt(i)]++;
+            freq[strOne.charAt(i)]++; // increments the bit position of that character
 
         }
 
         // Check if number of occurrences of
         // every character in strTwo is less than
         // or equal to that in strOne.
-        for (int i = 0; i < strTwo.length(); i++) {
+        for (int i = 0; i < strTwo.length(); i++) { // iterates through second String
 
-            freq[strTwo.charAt(i)]--;
+            freq[strTwo.charAt(i)]--; // decrements number with corresponding position in the array
 
-            if (freq[strTwo.charAt(i)] < 0) {
+            if (freq[strTwo.charAt(i)] < 0) { // if the decremented number becomes negative, return false
 
                 return false;
 
@@ -81,7 +81,7 @@ public class Scrabble {
 
         }
 
-        return true;
+        return true; // return true if decremented number is not negative
 
     }
 
