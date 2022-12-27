@@ -24,16 +24,23 @@ public class HistorgramApp {
         // Making a counter for each individual number
         int[] countNumArr = new int[100]; // creates an array with 100 elements, starts from 0
 
-        for (int i = 0; i < arrOne.length; i++) { // for loop that loops through our first array
+        // for (int i = 0; i < arrOne.length; i++) { // for loop that loops through our first array
 
-            // countNum[i] = inRange(arrOne, i, i + 1); // individually checks each number
-            // in array
-            // we could make this more efficient since invoking the inRange method for each
-            // loop is not as efficient
+        //     // countNum[i] = inRange(arrOne, i, i + 1); // individually checks each number
+        //     // in array
+        //     // we could make this more efficient since invoking the inRange method for each
+        //     // loop is not as efficient
 
-            // Another way of doing it is this, which is more efficient
-            int numIndex = arrOne[i]; // we assign the current iterated number in numIndex
-            countNumArr[numIndex]++; // finds same index in array equal to numIndex in countNumArr and increment it
+        //     // Another way of doing it is this, which is more efficient
+        //     int numIndex = arrOne[i]; // we assign the current iterated number in numIndex
+        //     countNumArr[numIndex]++; // finds same index in array equal to numIndex in countNumArr and increment it
+
+        // }
+
+        // Instead of using a for loop, we use a for each loop
+        for (int eachNum : arrOne) {
+
+            countNumArr[eachNum]++; // increments the corresponding number in number index array
 
         }
 
