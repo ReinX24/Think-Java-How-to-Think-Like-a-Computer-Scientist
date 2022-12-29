@@ -16,6 +16,7 @@ public class SievePrime {
          * 
          */
         System.out.println(Arrays.toString(sieveMethod(12))); // 0 - 11
+        System.out.println(Arrays.toString(sieveMethod(31))); // 0 - 30
 
     }
 
@@ -37,7 +38,7 @@ public class SievePrime {
             }
 
             // 2 and 3 are the first prime numbers
-            else if (i == 2 || i == 3) {
+            else if (i == 2 || i == 3 || i == 5) {
                 boolArr[i] = true;
             }
 
@@ -50,7 +51,13 @@ public class SievePrime {
             else if (i % 3 == 0) {
                 boolArr[i] = false;
             }
+            
+            // Every fifth number is not a prime number
+            else if (i % 5 == 0) {
+                boolArr[i] = false;
+            }
 
+            // All remaining numbers are prime numbers
             else {
                 boolArr[i] = true;
             }
