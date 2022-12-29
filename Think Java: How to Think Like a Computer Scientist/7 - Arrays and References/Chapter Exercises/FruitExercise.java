@@ -2,6 +2,8 @@ public class FruitExercise {
 
     public static void main(String[] args) {
 
+        // Exercise 7.1
+
         int[] numArr = { 1, 3, 5, 7, 9 };
         System.out.println(bananaMethod(numArr));
         System.out.println(grapefruitMethod(numArr, 3));
