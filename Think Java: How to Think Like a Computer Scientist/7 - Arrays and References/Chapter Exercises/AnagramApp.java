@@ -23,6 +23,9 @@ public class AnagramApp {
         boolean boolFour = isAnagram("Rein", "Near");
         System.out.println("Rein anagram of Near? > " + boolFour);
 
+        boolean boolFive = isAnagram("Mousepad", "Pad");
+        System.out.println("Mousepad anagram of Pad? > " + boolFive);
+
     }
 
     // Parameter that takes 2 Strings and checks if they are anagrams of each other
@@ -30,27 +33,33 @@ public class AnagramApp {
 
         boolean isAnagram = true; // true by default
         strOne = strOne.replaceAll("\\s", ""); // removes spaces if any, \\s is whitespace to be replaced by ""
-        strOne = strOne.toLowerCase(); // String lowercase
+        strOne = strOne.toLowerCase(); // converts String to all lowercase characters
         strTwo = strTwo.replaceAll("\\s", "");
         strTwo = strTwo.toLowerCase();
         int[] charArr = new int[26]; // storing characters of the first String
 
-        for (int i = 0; i < strOne.length(); i++) { // loops through first String
-            int charIndex = strOne.charAt(i) - 'a'; // converts char to an int index
-            charArr[charIndex]++; // increments char index in array
-        }
-
-        for (int i = 0; i < strTwo.length(); i++) { // loops through second String
-            int charIndex = strTwo.charAt(i) - 'a'; // converts char to a corresponding int
-            charArr[charIndex]--;
-
-            if (charArr[charIndex] < 0) { // if one of the char indexes go below 0, they are not anagrams
-                isAnagram = false;
-                return isAnagram; // returns immediately
+        if (strOne.length() == strTwo.length()) { // checks if the lengths are the same, if true, run code below
+            for (int i = 0; i < strOne.length(); i++) { // loops through first String
+                int charIndex = strOne.charAt(i) - 'a'; // converts char to an int index
+                charArr[charIndex]++; // increments char index in array
             }
-        }
 
-        return isAnagram; // returns true if none of the char indexes go below
+            for (int i = 0; i < strTwo.length(); i++) { // loops through second String
+                int charIndex = strTwo.charAt(i) - 'a'; // converts char to a corresponding int
+                charArr[charIndex]--;
+
+                if (charArr[charIndex] < 0) { // if one of the char indexes go below 0, they are not anagrams
+                    isAnagram = false;
+                    return isAnagram; // returns immediately
+                }
+            }
+
+            return isAnagram; // returns true if none of the char indexes go below
+
+        } else { // if the String lengths are not the same
+            isAnagram = false;
+            return isAnagram;
+        }
 
     }
 
