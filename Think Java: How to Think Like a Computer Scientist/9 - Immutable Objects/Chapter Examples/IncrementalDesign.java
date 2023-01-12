@@ -3,8 +3,8 @@ public class IncrementalDesign {
     public static void main(String[] args) {
         
         // Prints multiples of 1 to 6   
-        for (int i = 1; i <= 6; i++) {
-            printMulTable(i, 5);
+        for (int i = 1; i <= 7; i++) {
+            printMulTable(i, i);
         }
 
     }
