@@ -32,6 +32,17 @@ public class AddConcat {
         System.out.println("double " + 6.34563); // String & double
         System.out.println("Hello " + "World"); // String & String
 
+        int numX = 1;
+        numX = numX + 1;
+        System.out.println(numX); // 2
+        char charX = 'a';
+        // charX = charX + 1; // cannot convert from int to char
+        charX++; // is legal, goes to 'b' or next character
+        System.out.println(charX); // 'b'
+
+        String emptyString = "";
+        System.out.println(emptyString + 5); // just shows 5
+
     }
 
 }
