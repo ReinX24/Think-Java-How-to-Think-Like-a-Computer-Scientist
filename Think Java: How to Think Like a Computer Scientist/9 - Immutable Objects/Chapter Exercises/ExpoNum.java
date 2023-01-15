@@ -12,12 +12,25 @@ public class ExpoNum {
 
         System.out.println(factorialNum(5)); // for exercising factorials
         System.out.println(powerNum(5, 2)); // for exercising powers
-        System.out.println(Math.exp(1));
-        System.out.println(expNum(1, 17));
+        System.out.println(Math.exp(1)); // Euler's number raised to a number
+        System.out.println(expNum(1, 17)); // Euler's number raised to a number
+        compareResults(1);
+
+        double checkNumPos = 0.1;
+        while (checkNumPos <= 100.0) {
+            compareResults(checkNumPos);
+            checkNumPos *= 10;
+        }
+
+        double checkNumNeg = -0.1;
+        while (checkNumNeg >= -100.0) {
+            compareResults(checkNumNeg);
+            checkNumNeg *= 10;
+        }
 
     }
 
-    public static double expNum(int x, int n) {
+    public static double expNum(double x, int n) {
         double expNumTerm = 1;
         double expNumResult = 1;
         int i = 1;
@@ -27,6 +40,10 @@ public class ExpoNum {
             i++;
         }
         return expNumResult;
+    }
+
+    public static void compareResults(double x) {
+        System.out.println(x + "\t" + Math.exp(x) + "\t" + expNum(x, 17));
     }
 
     public static BigDecimal factorialNum(int x) {
