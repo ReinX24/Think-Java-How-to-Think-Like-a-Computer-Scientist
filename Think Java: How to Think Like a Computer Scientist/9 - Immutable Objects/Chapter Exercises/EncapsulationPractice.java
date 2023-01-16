@@ -34,6 +34,18 @@ public class EncapsulationPractice {
         for (int i = 0; i < doubleArrOne.length; i++) { // printing new double array elements
             System.out.print("\t" + doubleFormat.format(doubleArrOne[i]));
         }
+        System.out.println("\n[Problem #2]");
+        int[] numArr = { 5, 7, 32, 43, 12, 35, 23, 65, 43, 78, 99 }; // our int array
+        for (int i = 0; i < numArr.length; i++) {
+            System.out.print("\t" + numArr[i]); // printing numArr elements
+        }
+        System.out.println();
+
+        numArr = histogramInt(numArr, 100); // placing numbers in a histogram with 100 counters (0 - 99)
+
+        for (int i = 0; i < numArr.length; i++) { 
+            System.out.print("\t" + numArr[i]); // printing new numArr elements
+        }
         System.out.println();
 
     }
@@ -48,6 +60,14 @@ public class EncapsulationPractice {
             numArrPow[i] = powNumResult; // places result in corresponding index in numArrPow
         }
         return numArrPow; // returns array with numArr elements raised to numPow
+    }
+
+    public static int[] histogramInt(int[] numArr, int countNum) { // method that returns a histogram of numArr elements
+        int[] histogramIntArr = new int[countNum]; // where we will be storing our historgram array
+        for (int i = 0; i < numArr.length; i++) { // iterates through numArr, parameter array
+            histogramIntArr[numArr[i]]++;
+        }
+        return histogramIntArr; // return array as histogram of numArr elements
     }
 
 }
