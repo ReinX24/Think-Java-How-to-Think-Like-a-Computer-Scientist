@@ -4,6 +4,11 @@ public class PointRiddle {
 
     public static void main(String[] args) {
 
+        /*
+         * Exercise 10.1 The point of this exercise is to make sure you understand the
+         * mechanism for passing objects as parameters.
+         */
+
         int x = 5;
         Point pointOne = new Point(1, 2);
 
