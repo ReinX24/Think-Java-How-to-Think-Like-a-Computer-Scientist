@@ -102,33 +102,35 @@ public class Rational {
 
         Rational rationalSum = new Rational(0, 0);
 
+        /* If the denominators are the same, just add them together */
         if (this.denominator == paraRational.denominator) {
             rationalSum.numerator = this.numerator + paraRational.numerator;
             rationalSum.denominator = this.denominator + paraRational.denominator;
             return rationalSum;
-        } else {
+        } else { /* If denominators are different */
+            /* Numerator and denominator for our rationalSum */
             rationalSum.numerator = this.numerator * paraRational.denominator;
             rationalSum.denominator = this.denominator * paraRational.denominator;
-
+            /* 2 * 6 = 12, 5 * 6 = 30 */
+            /* 12 / 30 */
+            /* New numerator and denominator for paraRational */
             paraRational.numerator = paraRational.numerator * this.denominator;
             paraRational.denominator = paraRational.denominator * this.denominator;
+            /* 2 * 5 = 10, 6 * 5 = 30 */
+            /* 10 / 30 */
 
+            /* Adding numerators to each other */
             rationalSum.numerator += paraRational.numerator;
+            /* 22 / 30 */
+            
+            /* Calculating for greatest common denominator */
+            int GCD = rationalSum.greatestCommonDenominator();
 
-            int remainNum, numOne, numTwo;
-            numOne = rationalSum.numerator;
-            numTwo = rationalSum.denominator;
-            remainNum = numOne % numTwo;
-            while (remainNum != 0) {
-                remainNum = numOne % numTwo;
-                numOne = numTwo;
-                numTwo = remainNum;
-            }
-            int GCD = numOne;
-
+            /* Simplifying the numerator and the denominator*/
             rationalSum.numerator = rationalSum.numerator / GCD;
             rationalSum.denominator = rationalSum.denominator / GCD;
 
+            /* Returning rationalSum */
             return rationalSum;
         }
     }

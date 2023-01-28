@@ -34,7 +34,9 @@ public class RationalMain {
         rationalTwo.printRational();
         System.out.println(rationalTwo.toDouble());
         System.out.println(rationalOne.toDouble());
+
         System.out.println();
+
         Rational gcdTest = new Rational(270, 192);
         gcdTest.printRational();
         System.out.println(gcdTest.greatestCommonDenominator());
@@ -42,19 +44,23 @@ public class RationalMain {
         System.out.println(rationalOne.greatestCommonDenominator());
         rationalTwo.printRational();
         System.out.println(rationalTwo.greatestCommonDenominator());
+
         System.out.println();
+
         Rational addOne = new Rational(1, 3);
         Rational addTwo = new Rational(1, 3);
         Rational rationalSumOne = addOne.add(addTwo);
         addOne.printRational();
         addTwo.printRational();
         rationalSumOne.printRational();
+
         System.out.println();
+
         Rational addThree = new Rational(2, 5);
         Rational addFour = new Rational(2, 6);
-        Rational rationalSumTwo = addThree.add(addFour);
         addThree.printRational();
         addFour.printRational();
+        Rational rationalSumTwo = addThree.add(addFour);
         rationalSumTwo.printRational();
 
     }
