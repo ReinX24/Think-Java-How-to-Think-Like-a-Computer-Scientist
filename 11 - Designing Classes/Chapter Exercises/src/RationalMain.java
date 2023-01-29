@@ -45,7 +45,7 @@ public class RationalMain {
         rationalTwo.printRational();
         System.out.println(rationalTwo.greatestCommonDenominator());
 
-        System.out.println();
+        System.out.println("Adding Two Fractions with the same denominator");
 
         Rational addOne = new Rational(1, 3);
         Rational addTwo = new Rational(1, 3);
@@ -54,7 +54,7 @@ public class RationalMain {
         addTwo.printRational();
         rationalSumOne.printRational();
 
-        System.out.println();
+        System.out.println("Adding Two Fractions with different denominators");
 
         Rational addThree = new Rational(2, 5);
         Rational addFour = new Rational(2, 6);

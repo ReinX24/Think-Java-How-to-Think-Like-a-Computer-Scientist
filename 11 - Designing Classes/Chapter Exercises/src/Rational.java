@@ -105,7 +105,7 @@ public class Rational {
         /* If the denominators are the same, just add them together */
         if (this.denominator == paraRational.denominator) {
             rationalSum.numerator = this.numerator + paraRational.numerator;
-            rationalSum.denominator = this.denominator + paraRational.denominator;
+            rationalSum.denominator = this.denominator;
             return rationalSum;
         } else { /* If denominators are different */
             /* Numerator and denominator for our rationalSum */
