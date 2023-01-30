@@ -29,7 +29,59 @@ public class CardMain {
         System.out.println(threeOfDiamonds.compareTo(threeOfDiamonds)); // returns 0 since they have the same value
 
         /* Creating an Array of Cards */
-        Card[] cardsArr = new Card[52]; 
+        Card[] cardsArr = new Card[52];
+
+        if (cardsArr[0] == null) {
+            System.out.println("No Card Yet!");
+        }
+
+        /* Filling in the Array with a nested for loop */
+        int indexNum = 0;
+        for (int suitNum = 0; suitNum <= 3; suitNum++) {
+            for (int rankNum = 1; rankNum <= 13; rankNum++) {
+                cardsArr[indexNum] = new Card(rankNum, suitNum);
+                indexNum++;
+            }
+        }
+
+        /* Printing our cardsArr */
+        printDeck(cardsArr);
+
+        /* Finding a certain card in cardsArr */
+        System.out.println(searchDeck(cardsArr, threeOfClubs)); // 2
+        System.out.println(searchDeck(cardsArr, twoOfDiamonds)); // 14
+
+    }
+
+    /* Method that prints the contents of a card arrray */
+    public static void printDeck(Card[] cardsArr) { // stores Card array in paraCard
+        for (int i = 0; i < cardsArr.length; i++) { // for loop that prints each element in the array
+            System.out.println(cardsArr[i]);
+        }
+    }
+
+    /*
+     * Method that searches for a certain card in the cardsArr, uses sequential
+     * search
+     */
+    public static int searchDeck(Card[] cardsArr, Card targetCard) {
+        for (int i = 0; i < cardsArr.length; i++) {
+            if (cardsArr[i].equals(targetCard)) {
+                return i; // returns index of that card
+            }
+        }
+        return -1; // returns -1 of no matches are found
+    }
+
+    /* Method that searches for a card using binary search */
+    //TODO: Finish binarySearch method
+    public static int binarySearch(Card[] cardsArr, Card targetCard) {
+        int lowNum = 0; // min number
+        int highNum = cardsArr.length - 1; // max number
+        while (lowNum <= highNum) {
+
+        }
+
     }
 
 }
