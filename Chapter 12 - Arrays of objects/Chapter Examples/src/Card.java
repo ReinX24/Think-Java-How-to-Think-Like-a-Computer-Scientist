@@ -16,14 +16,17 @@ public class Card {
      * instantiated for all objects which makes them class variables.
      */
 
-    private int rank;
+    private final int rank;
     /*
      * Ace -> 1
      * Jack -> 11
      * Queen -> 12
      * King -> 13
+     * 
+     * Made these variables finals so that they could not be changed using setters
+     * or methods. Once an object is instantiated, it's value can never be changed.
      */
-    private int suit;
+    private final int suit;
     /*
      * Clubs -> 0
      * Diamonds -> 1
@@ -46,6 +49,39 @@ public class Card {
 
     }
 
-    /*  */
+    /* Equals method to check if two objects have the same attributes */
+    public boolean equals(Card paraCard) {
+        return this.rank == paraCard.rank && this.suit == paraCard.suit;
+    }
+
+    /*
+     * compareTo method that checks which of the two cards are higher in value. In
+     * this method, the suit is more important.
+     */
+    public int compareTo(Card paraCard) {
+        if (this.suit < paraCard.suit) {
+            return -1;
+        }
+        if (this.suit > paraCard.suit) {
+            return 1;
+        }
+        if (this.rank < paraCard.rank) {
+            return -1;
+        }
+        if (this.rank > paraCard.rank) {
+            return 1;
+        }
+        return 0; // if none of the objects above evaluate to true
+    }
+
+    /* Getter for Card Rank */
+    public int getRank() {
+        return this.rank;
+    }
+
+    /* Getter for Card Suit */
+    public int getSuit() {
+        return this.suit;
+    }
 
 }
