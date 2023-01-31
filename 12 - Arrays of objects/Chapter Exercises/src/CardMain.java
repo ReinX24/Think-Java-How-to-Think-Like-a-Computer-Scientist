@@ -27,6 +27,7 @@ public class CardMain {
         System.out.println(aceOfClubs.toString());
         System.out.println(kingOfClubs.toString());
         System.out.println(aceOfClubs.comapreTo(kingOfClubs)); // returns 1
+        System.out.println(kingOfClubs.comapreTo(aceOfClubs)); // -1
         System.out.println("[Suit Histogram]");
 
         /* Using suitHist */

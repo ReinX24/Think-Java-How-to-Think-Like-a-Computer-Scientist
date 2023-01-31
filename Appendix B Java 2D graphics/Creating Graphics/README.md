@@ -1,6 +1,6 @@
-## About Folder
+## Getting Started
 
-Contains chapter 12 exercises solutions.
+Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
 ## Folder Structure
 
