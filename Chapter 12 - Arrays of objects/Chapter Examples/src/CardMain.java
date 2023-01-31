@@ -47,15 +47,19 @@ public class CardMain {
         /* Printing our cardsArr */
         printDeck(cardsArr);
 
-        /* Finding a certain card in cardsArr */
+        /* Finding a card in cardsArr */
         System.out.println(searchDeck(cardsArr, threeOfClubs)); // 2
         System.out.println(searchDeck(cardsArr, twoOfDiamonds)); // 14
 
-        /* Finding a certain card in the array */
+        /* Finding a card in cardsArr using binary search */
         Card binaryTestOne = new Card(11, 0); // Jack of Clubs
         System.out.println(binarySearch(cardsArr, binaryTestOne)); // index of 10
         Card binaryTestTwo = new Card(15, 1); // 15 of Diamonds
         System.out.println(binarySearch(cardsArr, binaryTestTwo)); // -1, does not exist
+
+        /* Finding a card in cardsArr using binary search with recursion */
+        Card binaryTestThree = new Card(1, 1); // Ace of Diamonds
+        System.out.println(binarySearchRecursive(cardsArr, binaryTestThree, 0, cardsArr.length - 1));
 
     }
 
@@ -103,6 +107,25 @@ public class CardMain {
             }
         }
         return -1; // if not matches are found
+    }
+
+    /* Method that finds a card using a recursive binary search function */
+    public static int binarySearchRecursive(Card[] cardArr, Card targetCard, int lowNum, int highNum) {
+
+        if (highNum < lowNum) {
+            return -1;
+        }
+        int midNum = (lowNum + highNum) / 2; // step 1
+        int currCard = cardArr[midNum].compareTo(targetCard);
+
+        if (currCard == 0) { // step 2
+            return midNum;
+        } else if (currCard < 0) { // step 3
+            return binarySearchRecursive(cardArr, targetCard, midNum + 1, highNum);
+        } else { // step 4
+            return binarySearchRecursive(cardArr, targetCard, lowNum, midNum - 1);
+        }
+
     }
 
 }
