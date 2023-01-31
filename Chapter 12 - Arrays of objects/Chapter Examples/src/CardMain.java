@@ -51,6 +51,12 @@ public class CardMain {
         System.out.println(searchDeck(cardsArr, threeOfClubs)); // 2
         System.out.println(searchDeck(cardsArr, twoOfDiamonds)); // 14
 
+        /* Finding a certain card in the array */
+        Card binaryTestOne = new Card(11, 0); // Jack of Clubs
+        System.out.println(binarySearch(cardsArr, binaryTestOne)); // index of 10
+        Card binaryTestTwo = new Card(15, 1); // 15 of Diamonds
+        System.out.println(binarySearch(cardsArr, binaryTestTwo)); // -1, does not exist
+
     }
 
     /* Method that prints the contents of a card arrray */
@@ -74,14 +80,29 @@ public class CardMain {
     }
 
     /* Method that searches for a card using binary search */
-    //TODO: Finish binarySearch method
+    // DONE: Finish binarySearch method
     public static int binarySearch(Card[] cardsArr, Card targetCard) {
         int lowNum = 0; // min number
         int highNum = cardsArr.length - 1; // max number
         while (lowNum <= highNum) {
-
+            System.out.println(lowNum + ", " + highNum);
+            /* Step 1 */
+            int midNum = (lowNum + highNum) / 2;
+            int currCard = cardsArr[midNum].compareTo(targetCard);
+            /* Step 2 */
+            if (currCard == 0) { // if there are no differences, same card
+                return midNum; // returns the index
+            }
+            /* Step 3 */
+            else if (currCard < 0) { // if the current card is less than target
+                lowNum = midNum + 1; // goes to the right of the array
+            }
+            /* Step 4 */
+            else { // if the current card is higher than target
+                highNum = midNum - 1; // goes to the left of the array
+            }
         }
-
+        return -1; // if not matches are found
     }
 
 }
