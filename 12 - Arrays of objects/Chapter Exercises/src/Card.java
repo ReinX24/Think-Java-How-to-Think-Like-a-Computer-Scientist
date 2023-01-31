@@ -26,6 +26,13 @@ public class Card {
         if (this.cardSuit > paraCard.cardSuit) {
             return 1;
         }
+        /*
+         * Exercise 12.2 In some card games, Aces are ranked higher than Kings.
+         * Modify the compareTo method to implement this ordering.
+         */
+        if (paraCard.cardRank % 13 == 0 && this.cardRank < paraCard.cardRank) {
+            return 1;
+        }
         if (this.cardRank < paraCard.cardRank) {
             return -1;
         }
@@ -33,6 +40,15 @@ public class Card {
             return 1;
         }
         return 0; // return 0 if no differences
+    }
+
+    /* Getter for suit attribute */
+    public int getSuit() {
+        return this.cardSuit;
+    }
+    /* Setter for rank attribute */
+    public int getRank() {
+        return this.cardRank;
     }
 
 }
