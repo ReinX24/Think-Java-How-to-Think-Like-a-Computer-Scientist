@@ -15,6 +15,7 @@ public class Drawing extends Canvas {
 
     }
 
+    /* paint method called when the program runs, from Canvas object */
     public void paint(Graphics g) {
         g.fillOval(100, 100, 200, 200);
     }
