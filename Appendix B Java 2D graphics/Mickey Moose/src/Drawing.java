@@ -15,21 +15,24 @@ public class Drawing extends Canvas {
     public void Mickey(Graphics g, Rectangle bb) {
         /* Draws face */
         boxOval(g, bb);
+        if (bb.width < 3) {
+            return; // terminates program
+        }
         /* Creating Rectangle object for ears */
         int dx = bb.width / 2;
         int dy = bb.height / 2;
         Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
         /* Left ear */
         half.translate(-dx / 2, -dy / 2);
-        boxOval(g, half);
+        Mickey(g, half);
         /* Right ear */
         half.translate(dx * 2, 0);
-        boxOval(g, half);
+        Mickey(g, half);
     }
 
     public void paint(Graphics g) {
         Rectangle bb = new Rectangle(150, 200, 200, 200);
-        g.setColor(Color.orange);
+        g.setColor(Color.white);
         Mickey(g, bb); // invokes Mickey method
     }
 
@@ -38,7 +41,7 @@ public class Drawing extends Canvas {
         JFrame frameOne = new JFrame("Mickey Moose");
         Canvas canvasOne = new Drawing();
         canvasOne.setSize(500, 500);
-        canvasOne.setBackground(Color.white);
+        canvasOne.setBackground(Color.black);
         frameOne.add(canvasOne);
         frameOne.pack();
         frameOne.setVisible(true);

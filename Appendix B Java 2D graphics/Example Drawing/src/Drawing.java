@@ -15,9 +15,7 @@ public class Drawing extends Canvas {
     public void Mickey(Graphics g, Rectangle bb) {
         /* Draws the face */
         boxOval(g, bb); // calls boxOval method
-        if (bb.width < 3) {
-            return;
-        }
+
         /* Creates rectangle for the ears */
         int dx = bb.width / 2;
         int dy = bb.height / 2;
