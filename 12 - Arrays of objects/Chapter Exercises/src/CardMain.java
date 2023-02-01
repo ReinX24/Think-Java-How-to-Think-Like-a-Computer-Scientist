@@ -11,9 +11,9 @@ public class CardMain {
 
         /* Testing compareTo method */
         Card twoOfClubs = new Card(0, 2);
-        System.out.println(aceOfClubs.comapreTo(twoOfClubs)); // returns -1
+        System.out.println(aceOfClubs.compareTo(twoOfClubs)); // returns -1
         Card twoOfDiamonds = new Card(1, 2);
-        System.out.println(twoOfDiamonds.comapreTo(aceOfClubs)); // 1
+        System.out.println(twoOfDiamonds.compareTo(aceOfClubs)); // 1
 
         /* Creating a card array with cards */
         Card[] cardArr = makeDeck(); // creates a deck using a method
@@ -26,8 +26,8 @@ public class CardMain {
         Card kingOfClubs = new Card(0, 13);
         System.out.println(aceOfClubs.toString());
         System.out.println(kingOfClubs.toString());
-        System.out.println(aceOfClubs.comapreTo(kingOfClubs)); // returns 1
-        System.out.println(kingOfClubs.comapreTo(aceOfClubs)); // -1
+        System.out.println(aceOfClubs.compareTo(kingOfClubs)); // returns 1
+        System.out.println(kingOfClubs.compareTo(aceOfClubs)); // -1
         System.out.println("[Suit Histogram]");
 
         /* Using suitHist */
@@ -35,17 +35,26 @@ public class CardMain {
         for (int i : suitHist) {
             System.out.println(i);
         }
-        
+
         /* Using hasFlust */
         System.out.println("[hasFlush method]");
         System.out.println(hasFlush(cardArr)); // true
         Card threeOfClubs = new Card(0, 3);
         Card fourOfClubs = new Card(0, 4);
         Card threeOfDiamonds = new Card(1, 3);
-        Card[] handOne = {aceOfClubs, twoOfClubs, threeOfClubs, kingOfClubs, fourOfClubs, threeOfDiamonds};
+        Card[] handOne = { aceOfClubs, twoOfClubs, threeOfClubs, kingOfClubs, fourOfClubs, threeOfDiamonds };
         System.out.println(hasFlush(handOne)); // true
-        Card[] handTwo = {aceOfClubs, twoOfClubs, threeOfClubs, kingOfClubs, twoOfDiamonds, threeOfDiamonds};
+        Card[] handTwo = { aceOfClubs, twoOfClubs, threeOfClubs, kingOfClubs, twoOfDiamonds, threeOfDiamonds };
         System.out.println(hasFlush(handTwo)); // false
+
+        /* Using sequentialSearch */
+        System.out.println(sequentialSearch(cardArr, threeOfDiamonds)); // 15, index of threeOfDiamonds
+        Card nonCard = new Card(5, 15);
+        System.out.println(sequentialSearch(cardArr, nonCard)); // -1
+        /* binarySearch */
+        System.out.println(binarySearch(cardArr, twoOfClubs)); // 1
+        /* binarySearchRecursive */
+        System.out.println(binarySearchRecursive(cardArr, threeOfClubs, 0, cardArr.length - 1)); // 2
 
     }
 
@@ -116,6 +125,55 @@ public class CardMain {
             }
         }
         return false;
+    }
+
+    /* Sequential search */
+    public static int sequentialSearch(Card[] cardArr, Card targetCard) {
+        for (int i = 0; i < cardArr.length; i++) {
+            if (cardArr[i].equals(targetCard)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Binary search */
+    public static int binarySearch(Card[] cardArr, Card targetCard) {
+        int lowNum = 0;
+        int highNum = cardArr.length - 1;
+        while (lowNum <= highNum) {
+            int midNum = (lowNum + highNum) / 2;
+            int compareResult = cardArr[midNum].compareTo(targetCard);
+
+            if (compareResult == 0) { // if matches targetCard
+                return midNum;
+            } else if (compareResult < 0) { // if lower than targetCard
+                lowNum = midNum + 1;
+            } else { // if higher than targetCard
+                highNum = midNum - 1;
+            }
+        }
+        return -1; // if no matches are found
+    }
+
+    /* Binary search recursive */
+    public static int binarySearchRecursive(Card[] cardArr, Card targetCard, int lowNum, int highNum) {
+
+        if (highNum < lowNum) {
+            return -1;
+        }
+        
+        int midNum = (lowNum + highNum) / 2; // step 1
+        int currCard = cardArr[midNum].compareTo(targetCard);
+
+        if (currCard == 0) { // step 2
+            return midNum;
+        } else if (currCard < 0) { // step 3
+            return binarySearchRecursive(cardArr, targetCard, midNum + 1, highNum);
+        } else { // step 4
+            return binarySearchRecursive(cardArr, targetCard, lowNum, midNum - 1);
+        }
+
     }
 
 }
