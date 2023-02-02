@@ -51,21 +51,11 @@ public class Deck {
         cardArr[newCardIndex] = tempCard;
     }
 
-    /* Method for putting the deck in original order */
-    public void selectionSort() {
-        for (int i = 0; i < this.cardArr.length; i++) {
-            // find the lowest card at or to the right of i
-            int indexLowestNum = indexLowest(i, this.cardArr.length);
-            // swap the ith card and the lowest card found
-            swapCards(i, indexLowestNum);
-        }
-    }
-
     /* Method that finds the lowest value card in an array */
-    public int indexLowest(int i, int arrLength) {
-        int lowestCardIndex = 0;
-        for (int j = i + 1; j < arrLength; i++) {
-            if (this.cardArr[i].compareTo(this.cardArr[j]) == -1) {
+    public int indexLowest(int minNum, int maxNum) {
+        int lowestCardIndex = Math.min(minNum, maxNum); // lowest number between the two
+        for (int j = lowestCardIndex + 1; j < Math.max(minNum, maxNum); j++) { // .max - highest number between the two
+            if (this.cardArr[lowestCardIndex].compareTo(this.cardArr[j]) == 1) {
                 /*
                  * if the current card is lower than the one compared to it, replace
                  * lowestCardIndex with the compared card index (this.cardArr[j]).
@@ -74,6 +64,16 @@ public class Deck {
             }
         }
         return lowestCardIndex;
+    }
+
+    /* Method for putting the deck in original order */
+    public void selectionSort() {
+        for (int i = 0; i < this.cardArr.length; i++) {
+            // find the lowest card at or to the right of i
+            int indexLowestNum = indexLowest(i, this.cardArr.length);
+            // swap the ith card and the lowest card found
+            swapCards(i, indexLowestNum);
+        }
     }
 
 }
