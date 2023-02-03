@@ -121,4 +121,18 @@ public class Deck {
         return mergedDeck;
     }
 
+    /* Method for merging and sorting two Decks using recursion */
+    // TODO: Test almostMergeSory method
+    public Deck almostMergeSort(Deck paraDeck) {
+        // divide the deck into two subdecks
+        Deck subDeckOne = subDeck(0, paraDeck.cardArr.length / 2);
+        Deck subDeckTwo = subDeck(paraDeck.cardArr.length / 2 + 1, paraDeck.cardArr.length);
+        // sort the subdecks using selectionSort
+        subDeckOne.selectionSort();
+        subDeckTwo.selectionSort();
+        // merge the two halves and return the result
+        Deck mergedDecks = mergeDecks(subDeckOne, subDeckTwo);
+        return mergedDecks;
+    }
+
 }
