@@ -15,6 +15,12 @@ public class CardMain {
         subDeckOne.printDeck();
         Deck subDeckTwo = deckOne.subDeck(5, 9); // another subdeck of 5 cards
         subDeckTwo.printDeck();
+        System.out.println("[Testing Merge Decks]");
+        Deck mergeSortDeckOne = deckOne.subDeck(0, 4);
+        Deck mergeSortDeckTwo = deckOne.subDeck(7, 11);
+        Deck mergeSortTest = new Deck();
+        mergeSortTest = Deck.mergeDecks(mergeSortDeckOne, mergeSortDeckTwo); // need to call the Class since it is a static method
+        mergeSortTest.printDeck();
 
     }
 

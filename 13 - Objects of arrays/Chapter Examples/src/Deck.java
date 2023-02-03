@@ -87,52 +87,62 @@ public class Deck {
 
     /* Method that merges two decks */
     public static Deck mergeDecks(Deck deckOne, Deck deckTwo) {
-        // create a new deck big enough for all the cards
-        Deck mergedDeck = new Deck(deckOne.cardArr.length + deckTwo.cardArr.length);
+        // create a new deck big enough for all the cards (at bottom of method)
+        Card[] deckOneCardArr = deckOne.cardArr;
+        Card[] deckTwoCardArr = deckTwo.cardArr;
+        int deckOneLength = deckOneCardArr.length;
+        int deckTwoLength = deckTwoCardArr.length;
+        Card[] sortedArr = new Card[deckOneLength + deckTwoLength];
         // use the index i to keep track of where we are at in
         int i = 0;
         // the first deck, and the index j for the second deck
         int j = 0;
         // the index k traverses the result deck
-        for (int k = 0; k < mergedDeck.cardArr.length; k++) {
-            // if d1 is empty, d2 wins
-            if (deckOne.cardArr.length == 0) {
-                mergedDeck = deckTwo;
-            }
-            // if d2 is empty, d1 wins
-            else if (deckTwo.cardArr.length == 0) {
-                mergedDeck = deckOne;
-            } 
+        // if d1 is empty, d2 wins
+        if (deckOneLength == 0) {
+            sortedArr = deckTwoCardArr;
+        }
+        // if d2 is empty, d1 wins
+        else if (deckTwoLength == 0) {
+            sortedArr = deckOneCardArr;
+        } else {
             // otherwise, compare the two cards
-            else {
+            for (int k = 0; k < sortedArr.length; k++) {
                 // add the winner to the new deck at position k
                 // increment either i or j
-                if (deckOne.cardArr[k].compareTo(deckTwo.cardArr[k]) == 1) {
-                    mergedDeck.cardArr[k] = deckOne.cardArr[i];
+                /* If j is >= cardTwoArr lenght and deckOne card is less than deckTwo card */
+                if (j >= deckTwoCardArr.length
+                        || i < deckOneCardArr.length && deckOneCardArr[i].compareTo(deckTwoCardArr[j]) <= 0) {
+                    sortedArr[k] = deckOneCardArr[i]; // since the deckOne card is lower, add it first to the sortedArr
                     i++;
-                } else if (deckOne.cardArr[k].compareTo(deckTwo.cardArr[k]) == -1) {
-                    mergedDeck.cardArr[k] = deckTwo.cardArr[j];
+                } else {
+                    sortedArr[k] = deckTwoCardArr[j];
                     j++;
                 }
             }
 
         }
+        Deck mergedDeck = new Deck(deckOneLength + deckTwoLength);
+        mergedDeck.cardArr = sortedArr; // cardArr now references sortedArr
         // return the new deck
         return mergedDeck;
     }
 
     /* Method for merging and sorting two Decks using recursion */
-    // TODO: Test almostMergeSort method
-    public Deck almostMergeSort(Deck paraDeck) {
+    // DONE: Test mergeSort method
+    public Deck mergeSort() {
         // divide the deck into two subdecks
-        Deck subDeckOne = subDeck(0, paraDeck.cardArr.length / 2);
-        Deck subDeckTwo = subDeck(paraDeck.cardArr.length / 2 + 1, paraDeck.cardArr.length);
+        int deckLength = this.cardArr.length;
         // sort the subdecks using selectionSort
-        subDeckOne.selectionSort();
-        subDeckTwo.selectionSort();
-        // merge the two halves and return the result
-        Deck mergedDecks = mergeDecks(subDeckOne, subDeckTwo);
-        return mergedDecks;
+        if (deckLength == 0 || deckLength == 1) {
+            return this; // returns itself
+        } else {
+            // merge the two halves and return the result
+            int midNum = deckLength / 2;
+            Deck deckOne = subDeck(0, midNum - 1).mergeSort();
+            Deck deckTwo = subDeck(midNum, deckLength - 1).mergeSort();
+            return mergeDecks(deckOne, deckTwo);
+        }
     }
 
 }
