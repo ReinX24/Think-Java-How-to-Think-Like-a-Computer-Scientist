@@ -76,4 +76,49 @@ public class Deck {
         }
     }
 
+    /* Method for creating subdecks */
+    public Deck subDeck(int lowNum, int highNum) {
+        Deck subDeck = new Deck(highNum - lowNum + 1);
+        for (int i = 0; i < subDeck.cardArr.length; i++) {
+            subDeck.cardArr[i] = this.cardArr[lowNum + i]; // gets cards from current deck and adds them to subDeck
+        }
+        return subDeck;
+    }
+
+    /* Method that merges two decks */
+    public static Deck mergeDecks(Deck deckOne, Deck deckTwo) {
+        // create a new deck big enough for all the cards
+        Deck mergedDeck = new Deck(deckOne.cardArr.length + deckTwo.cardArr.length);
+        // use the index i to keep track of where we are at in
+        int i = 0;
+        // the first deck, and the index j for the second deck
+        int j = 0;
+        // the index k traverses the result deck
+        for (int k = 0; k < mergedDeck.cardArr.length; k++) {
+            // if d1 is empty, d2 wins
+            if (deckOne.cardArr.length == 0) {
+                mergedDeck = deckTwo;
+            }
+            // if d2 is empty, d1 wins
+            else if (deckTwo.cardArr.length == 0) {
+                mergedDeck = deckOne;
+            } 
+            // otherwise, compare the two cards
+            else {
+                // add the winner to the new deck at position k
+                // increment either i or j
+                if (deckOne.cardArr[k].compareTo(deckTwo.cardArr[k]) == 1) {
+                    mergedDeck.cardArr[k] = deckOne.cardArr[i];
+                    i++;
+                } else if (deckOne.cardArr[k].compareTo(deckTwo.cardArr[k]) == -1) {
+                    mergedDeck.cardArr[k] = deckTwo.cardArr[j];
+                    j++;
+                }
+            }
+
+        }
+        // return the new deck
+        return mergedDeck;
+    }
+
 }

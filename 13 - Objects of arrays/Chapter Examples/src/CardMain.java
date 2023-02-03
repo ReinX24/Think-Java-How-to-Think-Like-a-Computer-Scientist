@@ -10,6 +10,11 @@ public class CardMain {
         deckOne.selectionSort();
         System.out.println("[Sorted Deck]");
         deckOne.printDeck();
+        System.out.println("[Subdeck]");
+        Deck subDeckOne = deckOne.subDeck(0, 4); // creates a subdeck fo the first 5 cards in deckOne
+        subDeckOne.printDeck();
+        Deck subDeckTwo = deckOne.subDeck(5, 9); // another subdeck of 5 cards
+        subDeckTwo.printDeck();
 
     }
 
