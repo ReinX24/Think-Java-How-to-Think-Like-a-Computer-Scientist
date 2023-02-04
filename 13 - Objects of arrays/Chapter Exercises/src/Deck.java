@@ -29,6 +29,19 @@ public class Deck {
         }
     }
 
+    /*
+     * Exercise 13.2 The goal of this exercise is to implement the shuffling algo-
+     * rithm from this chapter.
+     */
+
+    /*
+     * 1. In the repository for this book, you should find a file called Deck.java
+     * that contains the code in this chapter. Check that you can compile it in
+     * your environment.
+     */
+
+    /* 4. Write a method called shuffle that uses the algorithm in Section 13.2. */
+
     /* Method for shuffling deck */
     public void shuffleDeck() {
         /* Iterate through the Deck using a loop */
@@ -40,11 +53,24 @@ public class Deck {
         }
     }
 
+    /*
+     * 2. Add a Deck method called randomInt that takes two integers, low and
+     * high, and returns a random integer between low and high, including
+     * both. You can use the nextInt provided by java.util.Random, which
+     * we saw in Section 8.7. But you should avoid creating a Random object
+     * every time randomInt is invoked.
+     */
+
     /* Method that generates a random number between two numbers (including both) */
     public int randomInt(int min, int max) {
         Random randOne = new Random(); // Random object to generate random number
         return randOne.nextInt((max - min) + 1) + min; // generates a random number between min & max (inclusive)
     }
+
+    /*
+     * 3. Write a method called swapCards that takes two indexes and swaps the
+     * cards at the given locations.
+     */
 
     /* Method that swaps two cards from each other */
     public void swapCard(int i, int newCardIndex) {
@@ -52,6 +78,18 @@ public class Deck {
         this.cardArr[i] = this.cardArr[newCardIndex];
         this.cardArr[newCardIndex] = tempCard;
     }
+
+    /*
+     * Exercise 13.3 The goal of this exercise is to implement the sorting algo-
+     * rithms from this chapter. Use the Deck.java file from the previous exercise
+     * (or create a new one from scratch).
+     */
+
+    /*
+     * 1. Write a method called indexLowest that uses the compareCard method
+     * to find the lowest card in a given range of the deck (from lowIndex to
+     * highIndex, including both).
+     */
 
     /* Method that finds the index of the lowest value card in the array */
     public int indexLowest(int minNum, int maxNum) {
@@ -66,6 +104,11 @@ public class Deck {
         }
         return lowestCardIndex;
     }
+
+    /*
+     * 2. Write a method called selectionSort that implements the selection sort
+     * algorithm in Section 13.3.
+     */
 
     /* Method that sorts the cardArr from lowest to highest */
     public void selectionSort() {
@@ -86,50 +129,80 @@ public class Deck {
         return subDeck;
     }
 
+    /*
+     * 3. Using the pseudocode in Section 13.4, write the method called merge.
+     * The best way to test it is to build and shuffle a deck. Then use subdeck
+     * to form two small subdecks, and use selection sort to sort them. Then
+     * you can pass the two halves to merge to see if it works.
+     */
+
     /* Merges two decks and sorts them from lowest to highest */
     public static Deck mergeDecks(Deck deckOne, Deck deckTwo) {
         /* Create 2 card arrays that holds each deck */
-        Card[] deckOneCards = deckOne.cardArr;
-        Card[] deckTwoCards = deckTwo.cardArr;
+        Card[] deckOneCardArr = deckOne.cardArr;
+        Card[] deckTwoCardArr = deckTwo.cardArr;
         /* Create variables that holds each deck length */
-        int deckOneLength = deckOneCards.length;
-        int deckTwoLegth = deckTwoCards.length;
+        int deckOneLength = deckOneCardArr.length;
+        int deckTwoLength = deckTwoCardArr.length;
         /* Create an array that will store the sorted array */
-        Card[] sortedCardArr = new Card[deckOneLength + deckTwoLegth];
+        Card[] sortedArr = new Card[deckOneLength + deckTwoLength];
         /* Create index i & j to be used to track first and second deck indexes */
         int i = 0;
         int j = 0;
         /* If the first deck is empty, second deck is the returned deck */
         if (deckOneLength == 0) {
-            return deckTwo;
+            sortedArr = deckTwoCardArr;
         }
         /* If the second deck is empty, return the first deck */
-        else if (deckTwoLegth == 0) {
-            return deckOne;
+        else if (deckTwoLength == 0) {
+            sortedArr = deckOneCardArr;
         }
         /*
          * If both have elements within, sort card arrays and add them to sortedCardArr
          */
         else {
-            for (int k = 0; k < sortedCardArr.length; k++) {
-                /*
-                 * if the deckOne card is less than the iterated card in deckTwo, place deckOne
-                 * card in sortedCardArr
-                 */
-                if (j >= deckTwoCards.length || i < deckOneCards.length && deckOneCards[i].compareTo(deckTwoCards[j]) <= 0) {
-                    sortedCardArr[k] = deckOneCards[i];
+            for (int k = 0; k < sortedArr.length; k++) {
+                // add the winner to the new deck at position k
+                // increment either i or j
+                /* If j is >= cardTwoArr length and deckOne card is less than deckTwo card */
+                if (j >= deckTwoCardArr.length
+                        || i < deckOneCardArr.length && deckOneCardArr[i].compareTo(deckTwoCardArr[j]) <= 0) {
+                    sortedArr[k] = deckOneCardArr[i]; // since the deckOne card is lower, add it first to the sortedArr
                     i++;
                 } else {
-                    sortedCardArr[k] = deckOneCards[j];
+                    sortedArr[k] = deckTwoCardArr[j];
                     j++;
                 }
             }
         }
-        Deck sortedMergedDeck = new Deck(sortedCardArr.length); // Deck object to hold sortedMergedDeck
-        sortedMergedDeck.cardArr = sortedCardArr; // replaces cards in sortedMergedDeck
+        Deck sortedMergedDeck = new Deck(deckOneLength + deckTwoLength); // Deck object to hold sortedMergedDeck
+        sortedMergedDeck.cardArr = sortedArr; // replaces cards in sortedMergedDeck
         /* Returning the new Deck */
         return sortedMergedDeck;
 
+    }
+
+    /*
+     * 4. Write the simple version of mergeSort, the one that divides the deck
+     * in half, uses selectionSort to sort the two halves, and uses merge to
+     * create a new, sorted deck.
+     */
+
+    /* Method that is similar to mergeSort but uses recursion */
+    public Deck mergeSortRecursive() {
+        int deckLength = this.cardArr.length;
+        if (deckLength == 0 || deckLength == 1) {
+            return this;
+        } else {
+            // divide the deck into 2 subdecks
+            int midNum = this.cardArr.length / 2; // middle point of our cardArr
+            /* First half (subDeck) of the cardArr then call current method */
+            Deck deckOne = subDeck(0, midNum - 1).selectionSort();
+            /* Second half (subDeck) if the cardArr then call current method */
+            Deck deckTwo = subDeck(midNum, this.cardArr.length - 1).selectionSort();;
+            /* Return mergedDecks deck */
+            return mergeDecks(deckOne, deckTwo);
+        }
     }
 
 }
