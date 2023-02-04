@@ -79,7 +79,7 @@ public class Deck {
     /* Method for creating subdecks */
     public Deck subDeck(int lowNum, int highNum) {
         Deck subDeck = new Deck(highNum - lowNum + 1);
-        for (int i = 0; i < subDeck.cardArr.length; i++) {
+        for (int i = 0; i < subDeck.cardArr.length; i++) { // iterates through original deck
             subDeck.cardArr[i] = this.cardArr[lowNum + i]; // gets cards from current deck and adds them to subDeck
         }
         return subDeck;
