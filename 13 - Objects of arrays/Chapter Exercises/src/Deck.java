@@ -86,12 +86,50 @@ public class Deck {
         return subDeck;
     }
 
-    /* Merges two decks */
-    public static mergeDeck(Deck deckOne, Deck deckTwo) {
+    /* Merges two decks and sorts them from lowest to highest */
+    public static Deck mergeDecks(Deck deckOne, Deck deckTwo) {
         /* Create 2 card arrays that holds each deck */
         Card[] deckOneCards = deckOne.cardArr;
         Card[] deckTwoCards = deckTwo.cardArr;
-        /* Create variables that holds each */
+        /* Create variables that holds each deck length */
+        int deckOneLength = deckOneCards.length;
+        int deckTwoLegth = deckTwoCards.length;
+        /* Create an array that will store the sorted array */
+        Card[] sortedCardArr = new Card[deckOneLength + deckTwoLegth];
+        /* Create index i & j to be used to track first and second deck indexes */
+        int i = 0;
+        int j = 0;
+        /* If the first deck is empty, second deck is the returned deck */
+        if (deckOneLength == 0) {
+            return deckTwo;
+        }
+        /* If the second deck is empty, return the first deck */
+        else if (deckTwoLegth == 0) {
+            return deckOne;
+        }
+        /*
+         * If both have elements within, sort card arrays and add them to sortedCardArr
+         */
+        else {
+            for (int k = 0; k < sortedCardArr.length; k++) {
+                /*
+                 * if the deckOne card is less than the iterated card in deckTwo, place deckOne
+                 * card in sortedCardArr
+                 */
+                if (j >= deckTwoCards.length || i < deckOneCards.length && deckOneCards[i].compareTo(deckTwoCards[j]) <= 0) {
+                    sortedCardArr[k] = deckOneCards[i];
+                    i++;
+                } else {
+                    sortedCardArr[k] = deckOneCards[j];
+                    j++;
+                }
+            }
+        }
+        Deck sortedMergedDeck = new Deck(sortedCardArr.length); // Deck object to hold sortedMergedDeck
+        sortedMergedDeck.cardArr = sortedCardArr; // replaces cards in sortedMergedDeck
+        /* Returning the new Deck */
+        return sortedMergedDeck;
+
     }
 
 }
