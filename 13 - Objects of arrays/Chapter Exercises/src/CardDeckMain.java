@@ -16,9 +16,14 @@ public class CardDeckMain {
         Deck mergedSortedDeck = new Deck();
         mergedSortedDeck = Deck.mergeDecks(subDeckOne, subDeckTwo);
         mergedSortedDeck.printDeck();
-        System.out.println("Merge Sort Deck");
+        System.out.println("[Merge Sort Deck]");
         mergedSortedDeck = mergedSortedDeck.mergeSortRecursive();
         mergedSortedDeck.printDeck();
+        System.out.println("[Insertion Sort]");
+        Deck insertionSortDeck = new Deck();
+        insertionSortDeck = Deck.mergeDecks(subDeckOne, subDeckTwo);
+        insertionSortDeck.insertionSort();
+        insertionSortDeck.printDeck();
 
 
     }

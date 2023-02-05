@@ -194,14 +194,40 @@ public class Deck {
         if (deckLength == 0 || deckLength == 1) {
             return this;
         } else {
+            // DONE: Recursive version of this method
             // divide the deck into 2 subdecks
             int midNum = this.cardArr.length / 2; // middle point of our cardArr
             /* First half (subDeck) of the cardArr then call current method */
-            Deck deckOne = subDeck(0, midNum - 1).selectionSort();
+            // Deck deckOne = subDeck(0, midNum - 1);
+            // deckOne.selectionSort();
+            /* Recursive version */
+            Deck deckOne = subDeck(0, midNum - 1).mergeSortRecursive();
             /* Second half (subDeck) if the cardArr then call current method */
-            Deck deckTwo = subDeck(midNum, this.cardArr.length - 1).selectionSort();;
+            // Deck deckTwo = subDeck(midNum, this.cardArr.length - 1);
+            // deckTwo.selectionSort();
+            /* Recursive version */
+            Deck deckTwo = subDeck(midNum, this.cardArr.length - 1).mergeSortRecursive();
             /* Return mergedDecks deck */
             return mergeDecks(deckOne, deckTwo);
+        }
+    }
+
+    /*
+     * Exercise 13.4 The goal of this exercise is to practice top-down program-
+     * ming by implementing “insertion sort”. Read about insertion sort at http:
+     * //www.sorting-algorithms.com/insertion-sort. Write a method named
+     * insertionSort that implements this algorithm.
+     */
+
+     /* Insertion sorts sorts the objects from lowest to highest value by replacing their positions */
+    public void insertionSort() {
+        for (int i = 0; i < this.cardArr.length - 1; i++) {
+            for (int j = i + 1; j < this.cardArr.length; j++) {
+                /* If the card at the left side of the array has a higher value than the right one, swap places */
+                if(this.cardArr[i].compareTo(this.cardArr[j]) == 1) {
+                    swapCard(i, j);
+                }
+            }
         }
     }
 
