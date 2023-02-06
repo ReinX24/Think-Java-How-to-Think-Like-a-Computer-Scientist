@@ -22,6 +22,7 @@ public class Deck {
         }
     }
 
+    // DONE: Create a toString method for the Deck class
     /*
      * Exercise 13.5 Write a toString method for the Deck class. It should return
      * a single string that represents the cards in the deck. When it’s printed,
@@ -31,14 +32,20 @@ public class Deck {
      * documentation by doing a web search for “Java StringBuilder”.
      */
 
-    /* Method for printing deck attributes */
-    public void printDeck() {
+    public String toString() {
         StringBuilder deckStringBuilder = new StringBuilder();
         /* Adding each String to our StringBuilder object */
-        for (int i = 0; i < this.cardArr.length; i++) {
-            deckStringBuilder.append(cardArr[i].toString() + "\n");
+        for(int i = 0; i < this.cardArr.length; i++) {
+            deckStringBuilder.append(this.cardArr[i] + "\n");
         }
-        System.out.println(deckStringBuilder);
+        return deckStringBuilder.toString(); // converts StringBuilder object to String
+    }
+
+    /* Method for printing deck attributes */
+    public void printDeck() {
+        for (int i = 0; i < this.cardArr.length; i++) {
+            System.out.println(this.cardArr[i]);
+        }
     }
 
     /*
