@@ -22,11 +22,23 @@ public class Deck {
         }
     }
 
+    /*
+     * Exercise 13.5 Write a toString method for the Deck class. It should return
+     * a single string that represents the cards in the deck. When it’s printed,
+     * this string should display the same results as the print method in Section
+     * 13.1. Hint: You can use the + operator to concatenate strings, but it is not
+     * very efficient. Consider using java.lang.StringBuilder; you can find the
+     * documentation by doing a web search for “Java StringBuilder”.
+     */
+
     /* Method for printing deck attributes */
     public void printDeck() {
+        StringBuilder deckStringBuilder = new StringBuilder();
+        /* Adding each String to our StringBuilder object */
         for (int i = 0; i < this.cardArr.length; i++) {
-            System.out.println(cardArr[i].toString());
+            deckStringBuilder.append(cardArr[i].toString() + "\n");
         }
+        System.out.println(deckStringBuilder);
     }
 
     /*
@@ -219,12 +231,18 @@ public class Deck {
      * insertionSort that implements this algorithm.
      */
 
-     /* Insertion sorts sorts the objects from lowest to highest value by replacing their positions */
+    /*
+     * Insertion sorts sorts the objects from lowest to highest value by replacing
+     * their positions
+     */
     public void insertionSort() {
         for (int i = 0; i < this.cardArr.length - 1; i++) {
             for (int j = i + 1; j < this.cardArr.length; j++) {
-                /* If the card at the left side of the array has a higher value than the right one, swap places */
-                if(this.cardArr[i].compareTo(this.cardArr[j]) == 1) {
+                /*
+                 * If the card at the left side of the array has a higher value than the right
+                 * one, swap places
+                 */
+                if (this.cardArr[i].compareTo(this.cardArr[j]) == 1) {
                     swapCard(i, j);
                 }
             }
