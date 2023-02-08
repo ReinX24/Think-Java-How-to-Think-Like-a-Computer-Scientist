@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CardCollection {
 
@@ -8,7 +9,7 @@ public class CardCollection {
     /* Constructor for CardCollection */
     public CardCollection(String labelStr) {
         this.labelStr = labelStr; // assigns a String for labelStr
-        this.cardArrList = new ArrayList<Card>(); // completes the instantiation of ArrayList
+        this.cardArrList = new ArrayList<>(); // completes the instantiation of ArrayList
     }
 
     /* Method that adds a Card to the ArrayList */
@@ -52,6 +53,12 @@ public class CardCollection {
         }
     }
 
+    /* Removes all cards from a CardCollection and adds them to a new one */
+    public void dealAll(CardCollection cardCol) {
+        int n = size(); // size of this.cardArrList
+        deal(cardCol, n); // moves all elements of cardArrList to cardCol
+    }
+
     /* Getter for an element in the ArrayList within CardCollection */
     public Card getCard(int i) {
         return cardArrList.get(i); // gets Card at index i
@@ -64,6 +71,30 @@ public class CardCollection {
     }
 
     /* Method that swaps the places of two cards */
-    // TODO: swapCards method
+    // DONE: swapCards method
+    public void swapCards(int i, int j) {
+        /* Place first card in a temporary card holder */
+        Card tempCard = cardArrList.get(i);
+        /* Replace first card with second card */
+        cardArrList.set(i, cardArrList.get(j));
+        /* Replace second card with tempCard */
+        cardArrList.set(j, tempCard);
+    }
+
+    /* Method that shuffles the cards in the cardArrList */
+    public void shuffle() {
+        /* Creating a Random object */
+        Random random = new Random();
+        /* Looping from cardArrList, starts at the end */
+        for (int i = size() - 1; i > 0; i--) {
+            int randomNum = random.nextInt(i); // generates a random number >= 0 but < i
+            swapCards(i, randomNum); // swaps card at the end with a random card to the left
+        }
+    }
+
+    /* Getter for CardCollection label */
+    public String getLabel() {
+        return this.labelStr;
+    }
 
 }
