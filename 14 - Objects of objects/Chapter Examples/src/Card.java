@@ -40,8 +40,8 @@ public class Card {
     }
 
     /* Getters for cardRank & cardSuit */
-    public String getRank() {
-        return RANKS[this.cardRank];
+    public int getRank() {
+        return this.cardRank;
     }
 
     public String getSuit() {
