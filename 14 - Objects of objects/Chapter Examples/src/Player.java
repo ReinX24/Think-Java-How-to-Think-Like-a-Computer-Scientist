@@ -84,4 +84,9 @@ public class Player {
         return scoreSum;
     }
 
+    /* Getter for playerName */
+    public String getName() {
+        return playerName;
+    }
+
 }
