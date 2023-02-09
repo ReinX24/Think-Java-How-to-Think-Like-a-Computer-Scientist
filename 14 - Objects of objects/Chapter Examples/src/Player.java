@@ -33,8 +33,8 @@ public class Player {
     /* Method that searches for matches */
     public Card searchForMatch(Card prev) {
         for (int i = 0; i < playerHand.size(); i++) {
-            Card currentCard = playerHand.getCard(i);
-            if (cardMatches(currentCard, prev)) {
+            Card currentCard = playerHand.getCard(i); // gets current Card of player
+            if (cardMatches(currentCard, prev)) { // if the playerHand has the card at the top of discardPile
                 return playerHand.popCard(i);
             }
         }
@@ -49,7 +49,7 @@ public class Player {
             if (cardMatches(drawnCard, prev)) { // if drawnCard is equal to prev card in parameter
                 return drawnCard;
             }
-            playerHand.addCard(drawnCard); // adds drawnCard to playerHand
+            playerHand.addCard(drawnCard); // adds drawnCard to playerHand if match not found
         }
     }
 
@@ -65,6 +65,23 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    /* Method that computes for penalty points */
+    public int score() {
+        int scoreSum = 0;
+        for (int i = 0; i < playerHand.size(); i++) {
+            Card currentCard = playerHand.getCard(i);
+            int cardRank = currentCard.getRank();
+            if(cardRank == 8) {
+                scoreSum -= 20;
+            } else if (cardRank > 10) {
+                scoreSum -= 10;
+            } else {
+                scoreSum -= cardRank;
+            }
+        }
+        return scoreSum;
     }
 
 }
