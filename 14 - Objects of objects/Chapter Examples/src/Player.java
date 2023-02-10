@@ -19,9 +19,14 @@ public class Player {
         playerHand.display();
     }
 
+    /* Displays playerName & score */
+    public void displayScore() {
+        System.out.println(playerName + " has " + score() + " points");
+    }
+
     /* Method that decides which card to discard during each turn */
     // DONE: play() method for Player class
-    // TODO: Re-read The Player class
+    // DONE: Re-read The Player class
     public Card play(Eights eights, Card prev) { // prev is the top of the discardPile in Eights class
         Card cardMatch = searchForMatch(prev);
         if (cardMatch == null) {

@@ -110,7 +110,17 @@ public class Eights {
     public void playGame() {
         Player currentPlayer = playerOne;
         /* keep playing the game until there is a winner */
-        // TODO: Implement playGame() method
+        // DONE: Implement playGame() method
+        while (!isDone()) {
+            displayState();
+            waitForUser();
+            takeTurn(currentPlayer);
+            currentPlayer = nextPlayer(currentPlayer);
+        }
+
+        /* display the final score */
+        playerOne.displayScore();
+        playerTwo.displayScore();
     }
 
 }
