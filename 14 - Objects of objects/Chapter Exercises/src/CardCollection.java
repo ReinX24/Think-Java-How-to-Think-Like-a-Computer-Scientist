@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CardCollection {
 
@@ -49,6 +50,43 @@ public class CardCollection {
     public void dealAllCards(CardCollection newCardCollection) {
         int currentListSize = size();
         dealCards(newCardCollection, currentListSize);
+    }
+
+    /* Gets a Card from an index in the object it is invoked on */
+    public Card getCard(int cardIndex) {
+        return cardList.get(cardIndex);
+    }
+
+    /* Gets last Card in array list and returns that Card, does not remove the Card */
+    public Card lastCard() {
+        Card lastCard = cardList.get(size() - 1);
+        return lastCard;
+    }
+
+    /* Method that swaps the places of two Card objects */
+    public void swapCards(int i, int j) {
+        /* Holds Card at index i */
+        Card tempCard = cardList.get(i);
+        /* Replaces Card at index i with Card at index j */
+        cardList.set(i, cardList.get(j));
+        /* Replaces Card at index j with Card at tempCard (i) */
+        cardList.set(j, tempCard);
+    }
+
+    /* Method that shuffles the Card in the array list */
+    public void shuffleCards() {
+        /* Random object to invoke Random methods */
+        Random randomObject = new Random();
+        /* Loops array list, starts from the end */
+        for (int i = size() - 1; i > 0; i--) {
+            int randomIndex = randomObject.nextInt(i); // random number >= 0 && < i
+            swapCards(i, randomIndex);
+        }
+    }
+
+    /* Getter for CardCollection label */
+    public String getLabel() {
+        return this.labelStr;
     }
 
 }

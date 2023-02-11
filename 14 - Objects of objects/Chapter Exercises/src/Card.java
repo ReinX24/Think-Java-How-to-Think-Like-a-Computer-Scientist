@@ -41,13 +41,11 @@ public class Card {
 
     /* Method that returns the String value of the Card's suit */
     public String getSuit() {
-        // DONE Auto-generated method stub
         return SUITS[this.cardSuit];
     }
 
     /* A toString method that prints a Card's rank */
     public String toString() {
-        // DONE Auto-generated method stub
         return RANKS[this.cardRank] + " of " + SUITS[this.cardSuit];
     }
 
