@@ -34,7 +34,7 @@ public class CardCollection {
     }
 
     /* Method that checks if an array list is empty or not */
-    public boolean isEmpty() {
+    public boolean isListEmpty() {
         return cardList.size() == 0;
     }
 

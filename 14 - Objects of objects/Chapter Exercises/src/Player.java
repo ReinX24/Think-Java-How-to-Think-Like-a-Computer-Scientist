@@ -94,14 +94,23 @@ public class Player {
             /* If the Card rank is equal to 8, subtract 20 points */
             if (eachCardRank == 8) {
                 penaltyPoints -= 20;
-            } else if (eachCardRank > 10) {
+            } 
+            /* If the Card rank is greater than 10, subtract 10 points */
+            else if (eachCardRank > 10) {
                 penaltyPoints -= 10;
-            } else {
+            } 
+            /* For other Cards, subtract by their rank value */
+            else {
                 penaltyPoints -= eachCardRank;
             }
         }
+        /* Return penaltyPoints after looping through playerHand */
+        return penaltyPoints;
     }
 
     /* Getter for playerName */
+    public String getPlayerName() {
+        return playerName;
+    }
 
 }
