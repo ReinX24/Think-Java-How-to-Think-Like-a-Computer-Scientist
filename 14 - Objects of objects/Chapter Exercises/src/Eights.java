@@ -80,4 +80,37 @@ public class Eights {
         return drawPile.popCard();
     }
 
+    /* Method that switches players, triggered after each Player turn */
+    public Player nextPlayer(Player currentPlayer) {
+        /* If currentPlayer == playerOne , return playerTwo. Else, return playerOne */
+        if (currentPlayer == playerOne) {
+            return playerTwo;
+        } else {
+            return playerOne;
+        }
+    }
+
+    /* Displays the state of the game */
+    public void displayState() {
+        /*
+         * Display playerOne & playerTwo Labels & Cards using display method in their
+         * class
+         */
+        playerOne.displayHand();
+        playerTwo.displayHand();
+        /* Display discardPile Cards */
+        discardPile.displayHand();
+        /* Display drawPile Cards amount, does not show Cards' elements */
+        System.out.print("Draw Pile: ");
+        System.out.println(drawPile.size() + " cards");
+    }
+    
+    /* Prompt that asks the user to execute a turn */
+    public void waitForUser() {
+        System.out.print("[Press Enter to Continue]\n> ");
+        userInput.nextLine();
+    }
+
+    /* One Player takes their turn */
+
 }

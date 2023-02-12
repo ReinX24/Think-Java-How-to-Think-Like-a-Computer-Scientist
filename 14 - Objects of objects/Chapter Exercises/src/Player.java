@@ -28,13 +28,20 @@ public class Player {
     public Card playGame(Eights eights, Card topCard) {
         /* Store the most recent Card discarded, topCard */
         Card targetCard = searchForMatch(topCard);
+        /* if the Player does not have a Card similar to topCard */
+        if (targetCard == null) {
+            /* Keep drawing from Deck in eights class until a similar Card is found */
+            targetCard = drawForMatch(eights, topCard);
+        }
+        /* Return the current Card in target Card after finding a match */
+        return targetCard;
     }
 
     /*
      * Method that searches for a similar Card in playerHand with the Card in
      * parameter
      */
-    public Card searchMatch(Card topCard) {
+    public Card searchForMatch(Card topCard) {
         /* Iterating through the Array List in playerHand */
         for (int i = 0; i < playerHand.size(); i++) {
             Card eachPlayerCard = playerHand.getCard(i); // gets a Card from playerHand
@@ -42,6 +49,7 @@ public class Player {
                 return playerHand.popCard(i); // remove & return the Card that is similar to topCard
             }
         }
+        return null;
     }
 
     /*
@@ -51,7 +59,7 @@ public class Player {
     public Card drawForMatch(Eights eights, Card topCard) {
         while (true) {
             /* Get one Card from drawPile in eights object */
-            Card drawnCard = eights.draw();
+            Card drawnCard = eights.drawCard();
             System.out.println(playerName + " draws " + drawnCard);
             /* Check if the drawnCard is similar in rank or suit with topCard */
             if (cardMatches(drawnCard, topCard)) {
@@ -94,11 +102,11 @@ public class Player {
             /* If the Card rank is equal to 8, subtract 20 points */
             if (eachCardRank == 8) {
                 penaltyPoints -= 20;
-            } 
+            }
             /* If the Card rank is greater than 10, subtract 10 points */
             else if (eachCardRank > 10) {
                 penaltyPoints -= 10;
-            } 
+            }
             /* For other Cards, subtract by their rank value */
             else {
                 penaltyPoints -= eachCardRank;
