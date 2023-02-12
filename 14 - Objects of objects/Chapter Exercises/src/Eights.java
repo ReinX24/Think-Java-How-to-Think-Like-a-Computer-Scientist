@@ -33,11 +33,12 @@ public class Eights {
          * Create a Hand object for discarded Cards & get one Card from gameDeck to be
          * the first Card in that Hand
          */
-        Hand discardPile = new Hand("Discard Pile");
+        discardPile = new Hand("Discard Pile");
         gameDeck.dealCards(discardPile, 1);
 
         /* Create a Hand object for all the remaining Cards in gameDeck */
-        Hand drawPile = new Hand("Draw Pile");
+        drawPile = new Hand("Draw Pile");
+        gameDeck.dealAllCards(drawPile);
 
         /* Finish creating our Scanner object */
         userInput = new Scanner(System.in);
@@ -45,8 +46,8 @@ public class Eights {
     }
 
     /* Method that checks if one of the playerHands are emtpy */
-    public boolean isEmpty() {
-        return playerOne.getHand().isListEmpty() || playerOne.getHand().isListEmpty();
+    public boolean isDone() {
+        return playerOne.getHand().isListEmpty() || playerTwo.getHand().isListEmpty();
     }
 
     /* Moves all Cards from discardPile to drawPile and shuffles the Cards */
@@ -104,7 +105,7 @@ public class Eights {
         System.out.print("Draw Pile: ");
         System.out.println(drawPile.size() + " cards");
     }
-    
+
     /* Prompt that asks the user to execute a turn */
     public void waitForUser() {
         System.out.print("[Press Enter to Continue]\n> ");
@@ -112,5 +113,42 @@ public class Eights {
     }
 
     /* One Player takes their turn */
+    public void takeTurn(Player currentPlayer) {
+        /* Get the lastCard in discardPile */
+        Card topCard = discardPile.lastCard();
+        /*
+         * Finds a similar Card in the currentPlayer's hand, passes in current Eights
+         * object & topCard.
+         */
+        Card matchCard = currentPlayer.playGame(this, topCard);
+        /* Add matching Card to discardPile */
+        discardPile.addCard(matchCard);
+        /* Display the Card that the currentPlayer adds to discardPile */
+        System.out.println(currentPlayer.getPlayerName() + " plays " + matchCard);
+        System.out.println();
+    }
+
+    /* Method that loops the game until one of the player's Hand are out of Cards */
+    public void playGame() {
+        /* Make the currentPlayer be playerOne */
+        Player currentPlayer = playerOne;
+        /*
+         * Show each player's Cards, prompt user to continue game, each player takes
+         * their turn until one of them run out of Cards, replace the currentPlayer.
+         */
+        /*
+         * Show each player's Cards, discarded Cards (discardPile), & amount of Cards in
+         * drawPile
+         */
+        while (!isDone()) {
+            displayState();
+            waitForUser();
+            takeTurn(currentPlayer);
+            currentPlayer = nextPlayer(currentPlayer);
+        }
+        /* Display the total penalty points of each player, winner should have 0 */
+        playerOne.displayScore();
+        playerTwo.displayScore();
+    }
 
 }
