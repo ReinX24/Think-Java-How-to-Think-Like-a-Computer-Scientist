@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Eights {
 
     /* Creating 2 Player objects for the Eights class */
+    /* Changed from Player to BetterPlayer */
     private BetterPlayer playerOne;
     private BetterPlayer playerTwo;
     /* Create 2 Hand objects, discardPile & drawPile */
