@@ -92,10 +92,10 @@ public class BetterPlayer extends Player {
             }
             for (int i = 0; i < total; i++) {
                 int position = possible.get(i);
-                EightsCard card = pile.getCard(position);
+                Card card = pile.getCard(position);
                 int rank = card.getRank();
-                int suit = card.getSuit();
-                int val = eval(rank, total, vary);
+                int suit = card.getSuitNum();
+                int val = eval(card, total, vary);
                 // With different weight
                 int value = val * 3 + suitStat[suit] * 6 + rankStat[rank] * 5;
                 if (value > max) {
@@ -104,7 +104,7 @@ public class BetterPlayer extends Player {
                 }
             }
         }
-        return pile.removeAt(index);
+        return pile.popCard(index);
     }
 
 }

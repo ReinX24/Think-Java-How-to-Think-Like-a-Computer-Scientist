@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class Eights {
 
     /* Creating 2 Player objects for the Eights class */
-    private Player playerOne;
-    private Player playerTwo;
+    private BetterPlayer playerOne;
+    private BetterPlayer playerTwo;
     /* Create 2 Hand objects, discardPile & drawPile */
     private Hand discardPile;
     private Hand drawPile;
@@ -23,10 +23,10 @@ public class Eights {
         int playerHandSize = 5;
 
         /* Create 2 Player objects and give each Player object Cards */
-        playerOne = new Player("Rein");
+        playerOne = new BetterPlayer("Rein");
         gameDeck.dealCards(playerOne.getHand(), playerHandSize);
 
-        playerTwo = new Player("Reinne");
+        playerTwo = new BetterPlayer("Reinne");
         gameDeck.dealCards(playerTwo.getHand(), playerHandSize);
 
         /*
