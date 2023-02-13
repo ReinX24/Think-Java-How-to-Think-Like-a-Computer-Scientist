@@ -44,6 +44,11 @@ public class Card {
         return SUITS[this.cardSuit];
     }
 
+    /* Method that returns the numeric value of a Card Suit */
+    public int getSuitNum() {
+        return this.cardSuit;
+    }
+
     /* A toString method that prints a Card's rank */
     public String toString() {
         return RANKS[this.cardRank] + " of " + SUITS[this.cardSuit];
