@@ -141,9 +141,9 @@ public class Eights {
      */
     public void playGame() {
         /* rountCounter to keep track of which round we are on */
-        int roundCounter = 1;
+        // int roundCounter = 1;
         /* Looping the game to run 100 times */
-        while (roundCounter <= 3) {
+        // while (roundCounter <= 3) {
             /* Make the currentPlayer be playerOne */
             BetterPlayer currentPlayer = playerOne;
             /*
@@ -165,19 +165,18 @@ public class Eights {
             playerTwo.displayScore();
 
             /* Find the winner of each round */
-            StringBuilder winnerLog = new StringBuilder();
-            String roundWinner;
-            if (playerOne.score() < playerTwo.score()) {
-                roundWinner = playerOne.getPlayerName();
-            } else {
-                roundWinner = playerTwo.getPlayerName();
-            }
+            // StringBuilder winnerLog = new StringBuilder();
+            // String roundWinner = "";
+            // if (playerTwo.score() < playerOne.score()) {
+            //     roundWinner = playerOne.getPlayerName();
+            // } else {
+            //     roundWinner = playerTwo.getPlayerName();
+            // }
             /* Add roundWinner to StringBuilder & print winnerLog */
-            winnerLog.append("Round " + roundCounter + " Winner :" + roundWinner + "\n");
-            System.out.println(winnerLog);
+            // winnerLog.append("Round " + roundCounter + " Winner :" + roundWinner + "\n");
+            // System.out.println(winnerLog);
             /* Increment roundCounter */
-            roundCounter++;
+            // roundCounter++;
         }
     }
 
-}
