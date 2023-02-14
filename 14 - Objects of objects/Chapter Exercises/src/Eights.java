@@ -130,20 +130,7 @@ public class Eights {
     }
 
     /* Method that loops the game until one of the player's Hand are out of Cards */
-    /*
-     * Exercise 14.2 Write a loop that plays the game 100 times and keeps track
-     * of how many times each player wins. If you implemented multiple strategies in
-     * the previous exercise, you can play them against each other to evaluate which
-     * one works best.
-     * 
-     * Hint: Design a Genius class that extends Player and overrides the play
-     * method, and then replace one of the players with a Genius object.
-     */
-    public void playGame() {
-        /* rountCounter to keep track of which round we are on */
-        // int roundCounter = 1;
-        /* Looping the game to run 100 times */
-        // while (roundCounter <= 3) {
+    public String playGame(int roundNum) {
             /* Make the currentPlayer be playerOne */
             BetterPlayer currentPlayer = playerOne;
             /*
@@ -164,19 +151,12 @@ public class Eights {
             playerOne.displayScore();
             playerTwo.displayScore();
 
-            /* Find the winner of each round */
-            // StringBuilder winnerLog = new StringBuilder();
-            // String roundWinner = "";
-            // if (playerTwo.score() < playerOne.score()) {
-            //     roundWinner = playerOne.getPlayerName();
-            // } else {
-            //     roundWinner = playerTwo.getPlayerName();
-            // }
-            /* Add roundWinner to StringBuilder & print winnerLog */
-            // winnerLog.append("Round " + roundCounter + " Winner :" + roundWinner + "\n");
-            // System.out.println(winnerLog);
-            /* Increment roundCounter */
-            // roundCounter++;
+            /* Return the name of the Player who won the game */
+            if (playerOne.score() == 0) {
+                return "\nRound " + roundNum + " Winner: " + playerOne.getPlayerName() + "\n";
+            } else {
+                return "\nRound " + roundNum + " Winner: " + playerTwo.getPlayerName() + "\n";
+            }
         }
     }
 

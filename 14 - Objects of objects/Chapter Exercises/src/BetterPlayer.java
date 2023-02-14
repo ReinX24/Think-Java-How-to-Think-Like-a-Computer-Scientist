@@ -44,7 +44,7 @@ public class BetterPlayer extends Player {
     public Card searchForMatch(Card topCard) {
         int[] suitStat = new int[4];
         int[] rankStat = new int[14];
-        int indexNum = -1;
+        int indexNum = 0;
 
         /* Put Player hand in a CardCollection object */
         CardCollection playerCards = getHand();
@@ -85,7 +85,7 @@ public class BetterPlayer extends Player {
         /* If the totalSize is > 1, evaluate the Cards */
         if (totalSize > 1) {
             // Evalute cards
-            int max = -1;
+            int max = 0;
             boolean vary = true;
             /* Loops through suitStat */
             for (int i = 0; i < 4; i++) {
