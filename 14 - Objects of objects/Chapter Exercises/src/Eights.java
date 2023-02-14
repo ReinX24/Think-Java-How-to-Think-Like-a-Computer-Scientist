@@ -83,7 +83,7 @@ public class Eights {
     }
 
     /* Method that switches players, triggered after each Player turn */
-    public Player nextPlayer(Player currentPlayer) {
+    public BetterPlayer nextPlayer(Player currentPlayer) {
         /* If currentPlayer == playerOne , return playerTwo. Else, return playerOne */
         if (currentPlayer == playerOne) {
             return playerTwo;
@@ -130,26 +130,54 @@ public class Eights {
     }
 
     /* Method that loops the game until one of the player's Hand are out of Cards */
+    /*
+     * Exercise 14.2 Write a loop that plays the game 100 times and keeps track
+     * of how many times each player wins. If you implemented multiple strategies in
+     * the previous exercise, you can play them against each other to evaluate which
+     * one works best.
+     * 
+     * Hint: Design a Genius class that extends Player and overrides the play
+     * method, and then replace one of the players with a Genius object.
+     */
     public void playGame() {
-        /* Make the currentPlayer be playerOne */
-        Player currentPlayer = playerOne;
-        /*
-         * Show each player's Cards, prompt user to continue game, each player takes
-         * their turn until one of them run out of Cards, replace the currentPlayer.
-         */
-        /*
-         * Show each player's Cards, discarded Cards (discardPile), & amount of Cards in
-         * drawPile
-         */
-        while (!isDone()) {
-            displayState();
-            waitForUser();
-            takeTurn(currentPlayer);
-            currentPlayer = nextPlayer(currentPlayer);
+        /* rountCounter to keep track of which round we are on */
+        int roundCounter = 1;
+        /* Looping the game to run 100 times */
+        while (roundCounter <= 3) {
+            /* Make the currentPlayer be playerOne */
+            BetterPlayer currentPlayer = playerOne;
+            /*
+             * Show each player's Cards, prompt user to continue game, each player takes
+             * their turn until one of them run out of Cards, replace the currentPlayer.
+             */
+            /*
+             * Show each player's Cards, discarded Cards (discardPile), & amount of Cards in
+             * drawPile
+             */
+            while (!isDone()) {
+                displayState();
+                waitForUser();
+                takeTurn(currentPlayer);
+                currentPlayer = nextPlayer(currentPlayer);
+            }
+            /* Display the total penalty points of each player, winner should have 0 */
+            playerOne.displayScore();
+            playerTwo.displayScore();
+
+            /* Find the winner of each round */
+            StringBuilder winnerLog = new StringBuilder();
+            String roundWinner;
+            if (playerOne.score() < playerTwo.score()) {
+                roundWinner = playerOne.getPlayerName();
+            } else {
+                roundWinner = playerTwo.getPlayerName();
+            }
+            /* Add roundWinner to StringBuilder & print winnerLog */
+            winnerLog.append("Round " + roundCounter + " Winner :" + roundWinner + "\n");
+            System.out.println(winnerLog);
+            /* Increment roundCounter */
+            roundCounter++;
         }
-        /* Display the total penalty points of each player, winner should have 0 */
-        playerOne.displayScore();
-        playerTwo.displayScore();
     }
 
 }
