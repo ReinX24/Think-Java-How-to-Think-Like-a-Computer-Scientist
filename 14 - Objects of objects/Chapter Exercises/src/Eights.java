@@ -1,11 +1,23 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Eights {
+
+    /*
+     * Exercise 14.3 One limitation of the program we wrote in this chapter is that
+     * it only handles two players. Modify the Eights class to create an ArrayList
+     * of players, and modify nextPlayer to select the next player.
+     */
 
     /* Creating 2 Player objects for the Eights class */
     /* Changed from Player to BetterPlayer */
     private BetterPlayer playerOne;
     private BetterPlayer playerTwo;
+    /* Creating more Player objects, for more than 2 players */
+    private BetterPlayer playerThree;
+    private BetterPlayer playerFour;
+    /* ArrayList that holds multiple players */
+    ArrayList<BetterPlayer> playerList = new ArrayList<>();
     /* Create 2 Hand objects, discardPile & drawPile */
     private Hand discardPile;
     private Hand drawPile;
@@ -14,6 +26,7 @@ public class Eights {
 
     /* Constructor for Eights objects */
     public Eights() {
+
         /* Create a Deck containing Cards */
         Deck gameDeck = new Deck("Deck");
 
@@ -29,6 +42,18 @@ public class Eights {
 
         playerTwo = new BetterPlayer("Reinne");
         gameDeck.dealCards(playerTwo.getHand(), playerHandSize);
+
+        playerThree = new BetterPlayer("Kristianna");
+        gameDeck.dealCards(playerThree.getHand(), playerHandSize);
+
+        playerFour = new BetterPlayer("Carina");
+        gameDeck.dealCards(playerFour.getHand(), playerHandSize);
+
+        /* Add all the players in playerList */
+        playerList.add(playerOne);
+        playerList.add(playerTwo);
+        playerList.add(playerThree);
+        playerList.add(playerFour);
 
         /*
          * Create a Hand object for discarded Cards & get one Card from gameDeck to be
@@ -84,11 +109,25 @@ public class Eights {
 
     /* Method that switches players, triggered after each Player turn */
     public BetterPlayer nextPlayer(Player currentPlayer) {
+        /* Player index where we will store the position of the Player */
+        int playerIndex = 0;
+        /* Find the position of currentPlayer in the ArrayList */
+        for (int i = 0; i < playerList.size(); i++) {
+            if (currentPlayer == playerList.get(i)) {
+                playerIndex = i;
+            }
+        }
         /* If currentPlayer == playerOne , return playerTwo. Else, return playerOne */
-        if (currentPlayer == playerOne) {
-            return playerTwo;
-        } else {
-            return playerOne;
+        /* Add other Player objets */
+        switch (playerIndex) {
+            case 0: 
+            return playerList.get(1);
+            case 1:   
+            return playerList.get(2);
+            case 2:
+            return playerList.get(3);
+            default:
+            return playerList.get(0);
         }
     }
 
@@ -98,8 +137,9 @@ public class Eights {
          * Display playerOne & playerTwo Labels & Cards using display method in their
          * class
          */
-        playerOne.displayHand();
-        playerTwo.displayHand();
+        for (int i = 0; i < playerList.size(); i++) {
+            playerList.get(i).displayHand();
+        }
         /* Display discardPile Cards */
         discardPile.displayHand();
         /* Display drawPile Cards amount, does not show Cards' elements */
@@ -131,32 +171,35 @@ public class Eights {
 
     /* Method that loops the game until one of the player's Hand are out of Cards */
     public String playGame(int roundNum) {
-            /* Make the currentPlayer be playerOne */
-            BetterPlayer currentPlayer = playerOne;
-            /*
-             * Show each player's Cards, prompt user to continue game, each player takes
-             * their turn until one of them run out of Cards, replace the currentPlayer.
-             */
-            /*
-             * Show each player's Cards, discarded Cards (discardPile), & amount of Cards in
-             * drawPile
-             */
-            while (!isDone()) {
-                displayState();
-                waitForUser();
-                takeTurn(currentPlayer);
-                currentPlayer = nextPlayer(currentPlayer);
-            }
-            /* Display the total penalty points of each player, winner should have 0 */
-            playerOne.displayScore();
-            playerTwo.displayScore();
+        /* Make the currentPlayer be playerOne */
+        BetterPlayer currentPlayer = playerOne;
+        /*
+         * Show each player's Cards, prompt user to continue game, each player takes
+         * their turn until one of them run out of Cards, replace the currentPlayer.
+         */
+        /*
+         * Show each player's Cards, discarded Cards (discardPile), & amount of Cards in
+         * drawPile
+         */
+        while (!isDone()) {
+            displayState();
+            waitForUser();
+            takeTurn(currentPlayer);
+            currentPlayer = nextPlayer(currentPlayer);
+        }
+        /* Display the total penalty points of each player, winner should have 0 */
+        for (int i = 0; i < playerList.size(); i++) {
+            playerList.get(i).displayScore();
+        }
 
-            /* Return the name of the Player who won the game */
-            if (playerOne.score() == 0) {
-                return "\nRound " + roundNum + " Winner: " + playerOne.getPlayerName() + "\n";
-            } else {
-                return "\nRound " + roundNum + " Winner: " + playerTwo.getPlayerName() + "\n";
-            }
+        /* Return the name of the Player who won the game */
+        for (int i = 0; i < playerList.size(); i++) {
+            
+        }
+        if (playerOne.score() == 0) {
+            return "\nRound " + roundNum + " Winner: " + playerOne.getPlayerName() + "\n";
+        } else {
+            return "\nRound " + roundNum + " Winner: " + playerTwo.getPlayerName() + "\n";
         }
     }
-
+}
