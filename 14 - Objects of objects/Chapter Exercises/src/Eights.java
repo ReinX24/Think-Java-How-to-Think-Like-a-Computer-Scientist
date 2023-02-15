@@ -156,7 +156,7 @@ public class Eights {
 
     /* Prompt that asks the user to execute a turn */
     public void waitForUser() {
-        System.out.print("[Press Enter to Continue]\n> ");
+        System.out.print("[Press Enter to Continue]\n");
         userInput.nextLine();
     }
 
