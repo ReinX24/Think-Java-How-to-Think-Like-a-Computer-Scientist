@@ -73,7 +73,13 @@ public class Eights {
 
     /* Method that checks if one of the playerHands are emtpy */
     public boolean isDone() {
-        return playerOne.getHand().isListEmpty() || playerTwo.getHand().isListEmpty();
+        boolean hasNoCards = false;
+        for (int i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i).getHand().isListEmpty()) {
+                hasNoCards = true;
+            }
+        }
+        return hasNoCards;
     }
 
     /* Moves all Cards from discardPile to drawPile and shuffles the Cards */
@@ -85,7 +91,7 @@ public class Eights {
         Card lastDiscard = discardPile.popCard();
 
         /* Move all of the remaining Cards in discardPile to drawPile */
-        drawPile.dealAllCards(discardPile);
+        discardPile.dealAllCards(drawPile);
 
         /* Return the top Card at discardPile */
         discardPile.addCard(lastDiscard);
@@ -145,6 +151,7 @@ public class Eights {
         /* Display drawPile Cards amount, does not show Cards' elements */
         System.out.print("Draw Pile: ");
         System.out.println(drawPile.size() + " cards");
+        drawPile.displayHand();
     }
 
     /* Prompt that asks the user to execute a turn */
@@ -172,7 +179,7 @@ public class Eights {
     /* Method that loops the game until one of the player's Hand are out of Cards */
     public String playGame(int roundNum) {
         /* Make the currentPlayer be playerOne */
-        BetterPlayer currentPlayer = playerOne;
+        BetterPlayer currentPlayer = playerList.get(0);
         /*
          * Show each player's Cards, prompt user to continue game, each player takes
          * their turn until one of them run out of Cards, replace the currentPlayer.
@@ -193,13 +200,12 @@ public class Eights {
         }
 
         /* Return the name of the Player who won the game */
+        int winnerIndex = 0;
         for (int i = 0; i < playerList.size(); i++) {
-            
+            if (playerList.get(i).score() == 0) {
+                winnerIndex = i;
+            }
         }
-        if (playerOne.score() == 0) {
-            return "\nRound " + roundNum + " Winner: " + playerOne.getPlayerName() + "\n";
-        } else {
-            return "\nRound " + roundNum + " Winner: " + playerTwo.getPlayerName() + "\n";
-        }
+        return "\nRound " + roundNum + " Winner: " + playerList.get(winnerIndex).getPlayerName() + "\n"; 
     }
 }

@@ -24,11 +24,13 @@ public class CardCollection {
 
     /* Removes a Card from the end of the Array List and returns said Card */
     public Card popCard() {
-        int endCard = cardList.size() - 1; // gets index of the last Card in cardList
-        return cardList.remove(endCard); // removes the Card and returns it
+            int endCard = cardList.size() - 1; // gets index of the last Card in cardList
+            return cardList.remove(endCard); // removes the Card and returns it
     }
 
-    /* Method that returns the size of the array list of the object it is invoked on */
+    /*
+     * Method that returns the size of the array list of the object it is invoked on
+     */
     public int size() {
         return cardList.size();
     }
@@ -57,7 +59,9 @@ public class CardCollection {
         return cardList.get(cardIndex);
     }
 
-    /* Gets last Card in array list and returns that Card, does not remove the Card */
+    /*
+     * Gets last Card in array list and returns that Card, does not remove the Card
+     */
     public Card lastCard() {
         Card lastCard = cardList.get(size() - 1);
         return lastCard;
